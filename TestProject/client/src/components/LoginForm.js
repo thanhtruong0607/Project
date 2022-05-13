@@ -20,7 +20,7 @@ const LoginForm = () => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        setErrors(validation(values));
+        setErrors(validation(values)); 
     }
 
     const [hidden, setHidden] = useState(false);
