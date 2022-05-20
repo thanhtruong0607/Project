@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import validation from './Validation';
+import validation from './validation';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import axios from '../service/axios';
 import { useNavigate } from 'react-router-dom'
