@@ -1,28 +1,37 @@
-import React, { useState } from 'react';
-import validation from './validation';
+import React, { useState, useEffect } from 'react';
+import validation from './Validation';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import axios from '../service/axios';
+import { useNavigate } from 'react-router-dom'
 
+const LOGIN_URL = '/login';
 const LoginForm = () => {
 
-    const [values, setValues] = useState({
-        username: "",
-        password: "",
-    });
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
 
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
-    const handleChange = (event) => {
-        setValues({
-            ...values,
-            [event.target.name]: event.target.value,
-        });
-    }
+    useEffect(() => {
+        if (localStorage.getItem('user')) {
+            navigate('/')
+        }
+    }, []);
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        setErrors(validation(values)); 
-    }
+        setErrors(validation(username, password));
 
+        const users = { username, password };
+
+        const response = await axios.post(LOGIN_URL, users)
+        console.log(response);
+
+        localStorage.setItem('users', JSON.stringify(response))
+        navigate('/');
+
+    }
     const [hidden, setHidden] = useState(false);
 
     const hiddenPassword = () => {
@@ -31,14 +40,14 @@ const LoginForm = () => {
 
     return (
         <div className='container-fluid row my-header' >
-            
-            <div className='img text-center pb-4 mb-3 col-12'>
-                <img alt='Logo' 
-                src='https://www.xboss.com/web/image/res.company/3/logo?unique=cecfb71'>
-                </img>
-           
-            </div>
 
+            <div className='img text-center pb-4 mb-3 col-12'>
+
+                <img alt='Logo'
+                    src='https://www.xboss.com/web/image/res.company/3/logo?unique=cecfb71'>
+                </img>
+
+            </div>
 
             <div className='app-wrapper'>
 
@@ -52,8 +61,8 @@ const LoginForm = () => {
                             User Name</label>
                         <input className='input'
                             type='text' name='username'
-                            value={values.username}
-                            onChange={handleChange}></input>
+                            value={username}
+                            onChange={(e) => { setUserName(e.target.value) }}></input>
                     </div>
                     {errors.username &&
                         <p className='error'>
@@ -64,8 +73,8 @@ const LoginForm = () => {
                         <input className='input'
                             type={hidden ? "text" : "password"}
                             name='password'
-                            value={values.password}
-                            onChange={handleChange}></input>
+                            value={password}
+                            onChange={(e) => { setPassword(e.target.value) }}></input>
                         <svg className='eye'
                             onClick={hiddenPassword}>
                             {hidden ? <AiOutlineEye /> :
