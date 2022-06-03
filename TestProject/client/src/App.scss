@@ -1,0 +1,156 @@
+* {
+  margin : 0;
+  padding: 0;
+}
+
+.my-header {
+  background-image: url(https://s3.cloud.cmctelecom.vn/tinhte1/2012/12/3245578_DSC08472.jpg);
+  width           : 100%;
+  min-height      : 100vh;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+}
+
+.img {
+  padding: 15px;
+}
+
+.app-wrapper {
+  background-color: #fff;
+  width           : 450px;
+  height          : 560px;
+  box-sizing      : border-box;
+  border-radius   : 6px;
+  margin-bottom   : 25px;
+}
+
+.title {
+  color     : #060505;
+  text-align: center;
+  margin    : 30px 0px 30px 0px;
+  padding   : 0px 40px 0px 40px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.username,
+.password {
+  margin       : 20px;
+  color        : #423f3f;
+  font-size    : 16px;
+  margin-bottom: 5px !important;
+}
+
+.password {
+  margin-bottom: 5px;
+}
+
+div {
+  display: block;
+}
+
+body {
+  direction: ltr;
+}
+
+.input {
+  height             : 32px;
+  font-size          : 20px;
+  outline            : none;
+  width              : 100%;
+  border-top-style   : none;
+  border-left-style  : none;
+  border-right-style : none;
+  border-bottom-style: 2px solid black;
+  margin-bottom      : 10px;
+}
+
+.input:focus {
+  border-color: #2717ce;
+}
+
+.error {
+  color      : red;
+  margin-left: 20px;
+}
+
+.submit {
+  display       : flex;
+  text-transform: uppercase;
+  font-size     : 20px;
+  border-radius : 25px;
+  color         : white;
+  padding       : 10px 170px;
+  background    : linear-gradient(to right, #3a14e4, #4019cd);
+  box-shadow    : rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  margin    : auto;
+  outline   : none;
+  border    : none;
+  cursor    : pointer;
+  transition: all 0.1s;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+.formsuccess {
+  display        : flex;
+  justify-content: center;
+  margin-top     : 250px;
+  min-width      : 370px;
+  color          : #f80759;
+}
+
+.eye {
+  position : absolute;
+  cursor   : pointer;
+  max-width: 30px;
+}
+
+@import "~bootstrap/scss/bootstrap";
+@import './settings';
+
+.trello-master {
+  height            : 100vh;
+  display           : grid;
+  grid-template-rows: 40px 50px 1fr;
+  background-color  : $board-nav-bg-color;
+  color             : $app-main-text-color;
+
+  .icon {
+    font-size   : 14px;
+    margin-right: 3px;
+  }
+
+  .trello-container {
+    margin : 0 15px;
+    padding: 0;
+  }
+
+  textarea:focus,
+  textarea.form-control:focus,
+  input.form-control:focus,
+  input[type=text]:focus,
+  input[type=password]:focus,
+  input[type=email]:focus,
+  input[type=number]:focus,
+  [type=text].form-control:focus,
+  [type=password].form-control:focus,
+  [type=email].form-control:focus,
+  [type=tel].form-control:focus,
+  [contenteditable].form-control:focus {
+    box-shadow: none;
+  }
+
+  .btn:focus,
+  .btn:active {
+    outline   : none;
+    box-shadow: none;
+  }
+
+}
