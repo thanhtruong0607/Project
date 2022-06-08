@@ -1,0 +1,68 @@
+$gap: 10px;
+
+.project-card {
+    height            : 100vh;
+    display           : grid;
+    grid-template-rows: 40px 50px 1fr;
+    line-height       : 1.3em;
+    background-color  : rgb(236, 235, 246);
+
+    .navbar {
+        padding-left: $gap;
+        display     : flex;
+        align-items : center;
+        font-size   : 1.5rem;
+
+        a {
+            list-style-type: none;
+        }
+    }
+
+    .project-columns {
+        display   : flex;
+        overflow-x: auto;
+
+        .project {
+            flex       : 0 0 auto;
+            width      : 300px;
+            height     : calc(100% - #{$gap});
+            margin-left: $gap;
+
+            >* {
+                background-color: rgb(217, 228, 228);
+                padding         : 0 8px;
+            }
+
+            header {
+                padding-left    : 15px;
+                height          : 30px;
+                line-height     : 45px;
+                font-size       : 16px;
+                font-weight     : bold;
+                background-color: rgb(217, 228, 228);
+
+                .span_star {
+                    input[type='radio'] {
+                        display: none;
+                    }
+                }
+            }
+
+            ul {
+                list-style-type: none;
+                padding        : 5px 15px;
+            }
+
+            span {
+                padding-left: 10px;
+                color       : rgb(3, 32, 179);
+            }
+
+            div {
+                padding  : 5px 10px;
+                color    : #333;
+                font-size: 0.9rem;
+            }
+        }
+    }
+}

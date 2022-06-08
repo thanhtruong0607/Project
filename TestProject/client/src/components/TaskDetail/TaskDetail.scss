@@ -1,0 +1,26 @@
+.task-detail {
+    margin: 40px 20px;
+
+    .header {
+        font-size: 1.9rem;
+
+    }
+
+    .table-detail {
+        margin: 20px 0 20px 0;
+
+        .td_label {
+            padding-left: 15px;
+        }
+
+        .td_form {
+            padding-left: 40px;
+
+            span {
+                input[type='radio'] {
+                    display: none;
+                }
+            }
+        }
+    }
+}
