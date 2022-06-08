@@ -15,7 +15,7 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (localStorage.getItem('user')) {
-            navigate('/')
+            navigate('/project')
         }
     }, []);
 
@@ -49,7 +49,7 @@ const LoginForm = () => {
         console.log(`user_info: `, user_info);
 
         localStorage.setItem("user-info", JSON.stringify(user_info));
-        navigate('/');
+        navigate('/project');
 
     }
     const [hidden, setHidden] = useState(false);

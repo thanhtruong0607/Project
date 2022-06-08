@@ -4,7 +4,7 @@ import './AppBar.scss'
 const AppBar = () => {
     return (
         <>
-            <nav className='navbar-app'>Project</nav>
+            <nav className='navbar-app'>Task</nav>
         </>
     )
 }

@@ -11,7 +11,7 @@ import { Container as BootstrapContainer, Row, Col, Form, Button } from "react-b
 
 const BoardContent = () => {
 
-    const [board, setBoard] = useState([]);
+    const [board, setBoard] = useState({});
     const [columns, setColumns] = useState([]);
     const [openNewColumn, setOpenNewColumn] = useState(false);
     const [newColumnTitle, setNewColumnTitle] = useState('');
@@ -21,8 +21,8 @@ const BoardContent = () => {
     const onNewColumnTitleChange = useCallback((e) => setNewColumnTitle(e.target.value), []);
 
     useEffect(() => {
-        let fetchAPI = async (params) => {
-            params = {
+        let fetchAPI = async () => {
+            let params = {
                 model: "project.project",
                 method: "search_read",
                 args: [
@@ -39,24 +39,25 @@ const BoardContent = () => {
                 },
             };
 
+            const response = await service.post(params);
 
+            console.log(`3 -------`, response);
 
-            let response = await service.post(params);
-            let data = (response && response.data) ? response.data.result : [];
-            setBoard(data);
+            return response.data;
+
 
         };
         fetchAPI();
-        // const boardInitData = initData.boards.find(item => item.id === 'board-1');
-        // if (boardInitData) {
-        //     setBoard(boardInitData);
+        const boardInitData = initData.boards.find(item => item.id === 'board-1');
+        if (boardInitData) {
+            setBoard(boardInitData);
 
-        //     // sort column 
-        //     // boardInitData.columns.sort((a, b) => 
-        //     // boardInitData.columnOrder.indexOf(a.id) - boardInitData.columnOrder.indexOf(b.id))
-        //     setColumns(mapOrder(boardInitData.columns, boardInitData.columnOrder, 'id'));
+            // sort column 
+            // boardInitData.columns.sort((a, b) => 
+            // boardInitData.columnOrder.indexOf(a.id) - boardInitData.columnOrder.indexOf(b.id))
+            setColumns(mapOrder(boardInitData.columns, boardInitData.columnOrder, 'id'));
 
-        // }
+        }
     }, []);
 
     useEffect(() => {
@@ -139,29 +140,10 @@ const BoardContent = () => {
         toggleOpenNewColumn();
     }
 
-    const renderItem = (column) => {
-        return (
-            <div>
-                {column.name}
-                {column.user_id[1]}
-            </div>
-        )
-    }
-
     return (
         <>
-            {console.log(board)}
             <div className='board-columns'>
-                <Container >
-                    {board.map((column) => {
-                        return (
-                            <Draggable key={column.id}>
-                                {renderItem(column)}
-                            </Draggable>
-                        );
-                    })}
-                </Container>
-                {/* <Container
+                <Container
                     orientation="horizontal"
                     onDrop={onColumnDrop}
                     getChildPayload={index => columns[index]}
@@ -174,7 +156,7 @@ const BoardContent = () => {
                         className: 'column-drop-preview'
                     }}
                 >
-                    {columns && columns.length > 0 && columns.map((column, index) => {
+                    {columns && columns.length > 0 && columns.map((column, index) => {  
                         return (
                             <Draggable key={column.id}>
                                 <Column
@@ -209,8 +191,7 @@ const BoardContent = () => {
                             </Col>
                         </Row>
                     }
-
-                </BootstrapContainer> */}
+                </BootstrapContainer>
             </div>
         </>
     )

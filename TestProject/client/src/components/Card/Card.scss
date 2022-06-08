@@ -8,12 +8,35 @@ div.card-item {
 
   margin-bottom: $gap;
 
+  .item {
+    color: #333;
+  }
+
   img {
     display                : block;
     width                  : calc(100% + 2*#{$gap});
-    margin                 : -$gap 0 $gap (-$gap);
+    margin                 : $gap 0 $gap (-$gap);
     border-top-left-radius : $column-border-radius;
     border-top-right-radius: $column-border-radius;
 
+  }
+
+  span {
+    padding: 0px 10px;
+
+    .icon {
+      font-size: 0.7rem;
+      color    : blue;
+    }
+  }
+
+  header {
+    span {
+      color: blue;
+
+      input[type='radio'] {
+        display: none;
+      }
+    }
   }
 }
