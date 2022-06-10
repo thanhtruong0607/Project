@@ -34,8 +34,12 @@ div.card-item {
     span {
       color: blue;
 
-      input[type='radio'] {
-        display: none;
+      label {
+        cursor: pointer;
+
+        input[type='radio'] {
+          display: none;
+        }
       }
     }
   }

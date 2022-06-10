@@ -2,8 +2,8 @@ import React from 'react'
 
 const NextStage = () => {
     return (
-        <div>
-            Home
+        <div className='text-center'>
+            <h1>Next</h1>
         </div>
     )
 }

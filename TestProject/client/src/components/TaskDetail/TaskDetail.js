@@ -8,9 +8,8 @@ const TaskDetail = () => {
 
     const [hover, setHover] = useState(null);
 
-
     return (
-        <div className="row task-detail">
+        <div className="row task-detail ">
 
             <header className='header'>
                 PROJECT TEST
@@ -23,7 +22,7 @@ const TaskDetail = () => {
                             <label>Dự Án</label>
                         </td>
                         <td className='td_form'>
-                            <a href='https://uat.xboss.com/web?debug#id=17&model=project.project&menu_id='>XBOSS MOBILE ERP</a>
+                            <a href='https://uat.xboss.com/web#id=17&model=project.project&menu_id='>XBOSS MOBILE ERP</a>
                         </td>
                     </tr>
                     <tr>
@@ -43,7 +42,7 @@ const TaskDetail = () => {
                             <label>Người Thực Hiện</label>
                         </td>
                         <td className='td_form'>
-                            <a href='https://uat.xboss.com/web?debug#id=208&model=res.users&menu_id='>Trần Giang Nam</a>
+                            <a href='https://uat.xboss.com/web#id=208&model=res.users&menu_id='>Trần Giang Nam</a>
                         </td>
                     </tr>
                     <tr>
@@ -95,7 +94,7 @@ const TaskDetail = () => {
                             <label>Người Báo Cáo</label>
                         </td>
                         <td className='td_form'>
-                            <a href='https://uat.xboss.com/web?debug#id=1280&model=res.partner'>0100109106 - Tập Đoàn Công Nghiệp - Viễn Thông Quân Đội</a>
+                            <a href='https://uat.xboss.com/web#id=1280&model=res.partner'>0100109106 - Tập Đoàn Công Nghiệp - Viễn Thông Quân Đội</a>
                         </td>
                     </tr>
                     <tr>

@@ -156,11 +156,12 @@ const BoardContent = () => {
                         className: 'column-drop-preview'
                     }}
                 >
-                    {columns && columns.length > 0 && columns.map((column, index) => {  
+                    {columns && columns.length > 0 && columns.map((column, index) => {
                         return (
                             <Draggable key={column.id}>
                                 <Column
-                                    column={column} onCardDrop={onCardDrop} />
+                                    column={column} onCardDrop={onCardDrop}
+                                />
                             </Draggable>
                         )
                     })}
@@ -191,6 +192,7 @@ const BoardContent = () => {
                             </Col>
                         </Row>
                     }
+
                 </BootstrapContainer>
             </div>
         </>

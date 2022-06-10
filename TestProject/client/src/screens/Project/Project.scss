@@ -42,8 +42,12 @@ $gap: 10px;
                 background-color: rgb(217, 228, 228);
 
                 .span_star {
-                    input[type='radio'] {
-                        display: none;
+                    label {
+                        cursor: pointer;
+
+                        input[type='radio'] {
+                            display: none;
+                        }
                     }
                 }
             }
