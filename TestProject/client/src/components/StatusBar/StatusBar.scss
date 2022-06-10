@@ -1,3 +1,30 @@
-.navbar {
-    margin: 0 15px 0 25px;
+.form-status {
+    margin          : 30px 15px 0 15px;
+    position        : relative;
+    background      : #c5bbeb;
+    border-radius: 8px;
+
+    ul {
+        li {
+
+
+            a {
+                font-size        : 13px;
+                font-weight      : bold;
+                text-transform   : uppercase;
+                line-height      : 20px;
+                color            : rgb(21, 20, 20);
+                // border-left      : 30px solid #86938c;
+                // border-top       : 10px solid transparent;
+                // border-bottom    : 10px solid transparent;
+                // float            : left;
+                // transition       : border 0.2s ease 0s;
+                border-width  : 0 10px 0 10px;
+            }
+
+            &a:hover {
+                transform: scale(1.3);
+            }
+        }
+    }
 }

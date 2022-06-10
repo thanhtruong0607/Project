@@ -18,6 +18,7 @@ export const initData = {
                             name: 'MASTER 1',
                             team_name: 'MOBILE TEAM',
                             image: 'https://amia.vn/wp-content/uploads/2017/10/tranh-phong-canh-nuoc-ngoai-ngoi-nha-mo-uoc-654.jpg'
+                            
                         },
                         {
                             id: 'card-2',

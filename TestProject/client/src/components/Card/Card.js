@@ -62,6 +62,8 @@ const Card = (props) => {
                         <span>
                             <a className="fa fa-check-square-o" href="/check"></a>
                         </span>
+                        <span className="avatar fa fa-circle"></span>
+                        <span className="avatars fa fa-angle-right"></span>
                     </div>
                 </div>
             </div>

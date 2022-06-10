@@ -3,7 +3,7 @@ import './StatusBar.scss'
 
 const StatusBar = () => {
     return (
-        <nav className="navbar navbar-expand-lg shadow-lg p-2 mb-5 bg-secondary rounded">
+        <nav className="form-status navbar-expand-lg shadow-lg p-2 mb-4 rounded">
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
@@ -32,7 +32,6 @@ const StatusBar = () => {
                         </a>
                     </li>
                 </ul>
-
             </div>
         </nav>
 
