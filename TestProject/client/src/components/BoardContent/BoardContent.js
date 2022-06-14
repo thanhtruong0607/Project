@@ -21,33 +21,7 @@ const BoardContent = () => {
     const onNewColumnTitleChange = useCallback((e) => setNewColumnTitle(e.target.value), []);
 
     useEffect(() => {
-        let fetchAPI = async () => {
-            let params = {
-                model: "project.project",
-                method: "search_read",
-                args: [
-                    [["active", "=", true]],
-                    ["name", "user_id", "type_id", "members", "task_count", "tasks"],
-                    0,
-                    0,
-                    "",
-                ],
-                kwargs: {},
-                context: {
-                    tz: "Asia/Ho_Chi_Minh",
-                    lang: "en_US",
-                },
-            };
-
-            const response = await service.post(params);
-
-            console.log(`3 -------`, response);
-
-            return response.data;
-
-
-        };
-        fetchAPI();
+        
         const boardInitData = initData.boards.find(item => item.id === 'board-1');
         if (boardInitData) {
             setBoard(boardInitData);
