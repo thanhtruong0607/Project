@@ -1,197 +1,213 @@
-@import '../../settings';
+// @import '../../settings';
 
-.trello-master {
-    height            : 100vh;
-    display           : grid;
-    grid-template-rows: 40px 50px 1fr;
-    background-color  : $board-nav-bg-color;
-    color             : $app-main-text-color;
+// .trello-master {
+//     height            : 100vh;
+//     display           : grid;
+//     grid-template-rows: 40px 50px 1fr;
+//     background-color  : $board-nav-bg-color;
+//     color             : $app-main-text-color;
 
-    .nav {
-        padding-left: $gap;
-        display     : flex;
-        align-items : center;
+//     .nav {
+//         padding-left: $gap;
+//         display     : flex;
+//         align-items : center;
 
-        &.app {
-            background-color: $app-nav-bg-color;
-            font-size       : 1.5rem;
-        }
+//         &.app {
+//             background-color: $app-nav-bg-color;
+//             font-size       : 1.5rem;
+//         }
 
-        &.board {
-            background-color: $board-nav-bg-color;
-            font-size       : 1.1rem;
-        }
+//         &.board {
+//             background-color: $board-nav-bg-color;
+//             font-size       : 1.1rem;
+//         }
 
-    }
+//     }
 
-    .board-columns {
-        display      : flex;
-        // overflow-x: auto;
+//     .board-columns {
+//         display      : flex;
+//         // overflow-x: auto;
 
-        &::after {
-            content: '';
-            flex   : 0 0 $gap;
-        }
+//         &::after {
+//             content: '';
+//             flex   : 0 0 $gap;
+//         }
 
-        &::-webkit-scrollbar {
-            -webkit-appearance: none;
-        }
+//         &::-webkit-scrollbar {
+//             -webkit-appearance: none;
+//         }
 
-        &::-webkit-scrollbar:horizontal {
-            height: 11px;
-        }
+//         &::-webkit-scrollbar:horizontal {
+//             height: 11px;
+//         }
 
-        &::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, .24);
-            border-radius   : 5px solid $list-bg-color;
-        }
-
-
-        .column {
-            flex       : 0 0 auto;
-            width      : 300px;
-            height     : calc(100vh - 40px - 50px - #{$gap});
-            margin-left: $gap;
-
-            >* {
-                background-color: $list-bg-color;
-                color           : $app-main-text-color;
-                padding         : 0px 7px;
-            }
-
-            header {
-                padding-left           : 15px;
-                height                 : $column-header-height;
-                line-height            : $column-header-height;
-                font-size              : 16px;
-                font-weight            : bold;
-                border-top-left-radius : $column-border-radius;
-                border-top-right-radius: $column-border-radius;
-                cursor                 : grab;
-            }
-
-            footer {
-                padding-left              : 10px;
-                height                    : $column-footer-height;
-                line-height               : $column-footer-height;
-                font-weight               : bold;
-                border-bottom-left-radius : $column-border-radius;
-                border-bottom-right-radius: $column-border-radius;
-                color                     : #888;
-
-                .footer-action {
-                    margin-left: $gap;
-                    cursor     : pointer;
-
-                    &:hover {
-                        color: black;
-                    }
-                }
-            }
-
-            .card-list {
-                list-style-type: none;
-                margin         : 0;
-                max-height     : calc(100% - #{$column-header-height} - #{$column-footer-height});
-                overflow-y     : auto;
-                cursor         : grab;
-
-                &::-webkit-scrollbar {
-                    -webkit-appearance: none;
-                }
-
-                &::-webkit-scrollbar:vertical {
-                    width: 16px;
-                }
-
-                &::-webkit-scrollbar-thumb {
-                    background-color: darken($color: $list-bg-color, $amount: 15);
-                    border-radius   : 8px;
-                    border          : 4px solid transparent;
-                    background-clip : padding-box;
-                }
-
-                .card-item {
-                    background-color: white;
-                    padding         : $gap;
-                    border-radius   : $column-border-radius;
-                    box-shadow      : 0 1px 1px rgba(0, 0, 0, 0.6);
-                    margin-bottom   : $gap;
-
-                    img {
-                        display                : block;
-                        width                  : calc(100% + 2*#{$gap});
-                        margin                 : $gap 0 $gap (-$gap);
-                        border-top-left-radius : $column-border-radius;
-                        border-top-right-radius: $column-border-radius;
-
-                    }
-
-                    .avatar {
-                        padding-left: 90px;
-                    }
-
-                    .avatars {
-                        padding-left: 5px;
-                    }
+//         &::-webkit-scrollbar-thumb {
+//             background-color: rgba(255, 255, 255, .24);
+//             border-radius   : 5px solid $list-bg-color;
+//         }
 
 
-                    span {
-                        padding: 0px 10px;
+//         .column {
+//             flex       : 0 0 auto;
+//             width      : 300px;
+//             height     : calc(100vh - 40px - 50px - #{$gap});
+//             margin-left: $gap;
 
-                        .icon {
-                            font-size: 0.7rem;
-                            color    : blue;
-                        }
-                    }
+//             >* {
+//                 background-color: $list-bg-color;
+//                 color           : $app-main-text-color;
+//                 padding         : 0px 7px;
+//             }
 
-                    .header-card {
-                        span {
-                            color: blue;
+//             header {
+//                 // padding-left           : 15px;
+//                 height                 : $column-header-height;
+//                 line-height            : $column-header-height;
+//                 font-size              : 16px;
+//                 font-weight            : bold;
+//                 border-top-left-radius : $column-border-radius;
+//                 border-top-right-radius: $column-border-radius;
+//                 cursor                 : grab;
+//             }
 
-                            label {
-                                cursor: pointer;
+//             footer {
+//                 padding-left              : 10px;
+//                 height                    : $column-footer-height;
+//                 line-height               : $column-footer-height;
+//                 font-weight               : bold;
+//                 border-bottom-left-radius : $column-border-radius;
+//                 border-bottom-right-radius: $column-border-radius;
+//                 color                     : #888;
 
-                                input[type='radio'] {
-                                    display: none;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//                 .footer-action {
+//                     margin-left: $gap;
+//                     cursor     : pointer;
 
-    .icon {
-        font-size   : 14px;
-        margin-right: 3px;
-    }
+//                     &:hover {
+//                         color: black;
+//                     }
+//                 }
+//             }
 
-    .trello-container {
-        margin : 0 15px;
-        padding: 0;
-    }
+//             .card-list {
+//                 list-style-type: none;
+//                 margin         : 0;
+//                 max-height     : calc(100% - #{$column-header-height} - #{$column-footer-height});
+//                 overflow-y     : auto;
+//                 cursor         : grab;
 
-    textarea:focus,
-    textarea.form-control:focus,
-    input.form-control:focus,
-    input[type=text]:focus,
-    input[type=password]:focus,
-    input[type=email]:focus,
-    input[type=number]:focus,
-    [type=text].form-control:focus,
-    [type=password].form-control:focus,
-    [type=email].form-control:focus,
-    [type=tel].form-control:focus,
-    [contenteditable].form-control:focus {
-        box-shadow: none;
-    }
+//                 &::-webkit-scrollbar {
+//                     -webkit-appearance: none;
+//                 }
 
-    .btn:focus,
-    .btn:active {
-        outline   : none;
-        box-shadow: none;
-    }
+//                 &::-webkit-scrollbar:vertical {
+//                     width: 16px;
+//                 }
 
-}
+//                 &::-webkit-scrollbar-thumb {
+//                     background-color: darken($color: $list-bg-color, $amount: 15);
+//                     border-radius   : 8px;
+//                     border          : 4px solid transparent;
+//                     background-clip : padding-box;
+//                 }
+
+//                 .card-item {
+//                     background-color: white;
+//                     padding         : $gap;
+//                     border-radius   : $column-border-radius;
+//                     box-shadow      : 0 1px 1px rgba(0, 0, 0, 0.6);
+//                     margin-bottom   : $gap;
+
+//                     img {
+//                         display                : block;
+//                         width                  : calc(100% + 2*#{$gap});
+//                         margin                 : $gap 0 $gap (-$gap);
+//                         border-top-left-radius : $column-border-radius;
+//                         border-top-right-radius: $column-border-radius;
+
+//                     }
+
+//                     .icon-check {
+//                         span {
+//                             padding: 0px 10px;
+
+//                             .icon {
+//                                 font-size: 0.7rem;
+//                                 color    : blue;
+//                             }
+//                         }
+
+//                         .avatar {
+//                             padding-left: 90px;
+//                         }
+
+//                         .avatars {
+//                             padding-left: 5px;
+//                         }
+
+//                     }
+
+
+
+//                     .title-card {
+//                         span {
+//                             padding: 0px 3px;
+
+//                             .icon {
+//                                 font-size: 0.7rem;
+//                                 color    : blue;
+//                             }
+//                         }
+//                     }
+
+//                     .header-card {
+//                         span {
+//                             padding-right: 10px;
+//                             color        : blue;
+
+//                             label {
+//                                 cursor: pointer;
+
+//                                 input[type='radio'] {
+//                                     display: none;
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+
+//     .icon {
+//         font-size   : 14px;
+//         margin-right: 3px;
+//     }
+
+//     .trello-container {
+//         margin : 0 15px;
+//         padding: 0;
+//     }
+
+//     textarea:focus,
+//     textarea.form-control:focus,
+//     input.form-control:focus,
+//     input[type=text]:focus,
+//     input[type=password]:focus,
+//     input[type=email]:focus,
+//     input[type=number]:focus,
+//     [type=text].form-control:focus,
+//     [type=password].form-control:focus,
+//     [type=email].form-control:focus,
+//     [type=tel].form-control:focus,
+//     [contenteditable].form-control:focus {
+//         box-shadow: none;
+//     }
+
+//     .btn:focus,
+//     .btn:active {
+//         outline   : none;
+//         box-shadow: none;
+//     }
+
+// }

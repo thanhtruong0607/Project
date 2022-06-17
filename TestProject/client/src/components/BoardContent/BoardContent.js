@@ -66,102 +66,102 @@ const BoardContent = () => {
 
             let dataTask = response && response.data.result ? response.data.result : [];
 
-            setBoard(dataTask);
+            let board = _.map(_.groupBy(dataTask, (task) => {
+                return task.stage_id;
+            }), (column, key) => {
+
+                return {
+                    id: key.split(',')[0],
+                    title: key.split(',')[1], data: column
+                }
+            })
+            setBoard(board);
 
 
         }
         fetchTaskAPI();
     }, []);
 
-    // const boardInitData = initData.boards.find(item => item.id === 'board-1');
-    // if (boardInitData) {
-    //     setBoard(boardInitData);
-    //     // sort column 
-    //     // boardInitData.columns.sort((a, b) => 
-    //     // boardInitData.columnOrder.indexOf(a.id) - boardInitData.columnOrder.indexOf(b.id))
-    //     setColumns(mapOrder(boardInitData.columns, boardInitData.columnOrder, 'id'));
-    // }
+
+    useEffect(() => {
+        if (newColumInputRef && newColumInputRef.current) {
+            newColumInputRef.current.focus();
+            newColumInputRef.current.select();
+        }
+    }, [openNewColumn])
+
+    if (_.isEmpty(board)) {
+        return (
+            <>
+                <div className="not-found">Board not found</div>
+            </>
+        )
+    }
+
+    const onColumnDrop = (dropResult) => {
+
+        let newColumns = [...columns];
+        newColumns = applyDrag(newColumns, dropResult);
+
+        let newBroad = { ...board };
+        newBroad.columnOrder = newColumns.map(c => c.id);
+        newBroad.columns = newColumns;
+
+        console.log(newBroad);
+
+        setColumns(newColumns);
+        setBoard(newBroad);
+    }
+
+    const onCardDrop = (columnId, dropResult) => {
+
+        if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+
+            let newColumns = [...columns];
+
+            let currentColumn = newColumns.find(c => c.id === columnId);
+
+            currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
+
+            currentColumn.cardOrder = currentColumn.cards.map(i => i.id);
+
+            console.log(currentColumn);
+            setColumns(newColumns);
+        }
+    }
+
+    const toggleOpenNewColumn = () => {
+        setOpenNewColumn(!openNewColumn);
+    }
 
 
-    // useEffect(() => {
-    //     if (newColumInputRef && newColumInputRef.current) {
-    //         newColumInputRef.current.focus();
-    //         newColumInputRef.current.select();
-    //     }
-    // }, [openNewColumn])
+    const addNewColumn = () => {
+        if (!newColumnTitle) {
+            newColumInputRef.current.focus();
+            return
+        }
 
-    // if (_.isEmpty(board)) {
-    //     return (
-    //         <>
-    //             <div className="not-found">Board not found</div>
-    //         </>
-    //     )
-    // }
+        const addColumnToAdd = {
+            id: Math.random().toString(36).substring(2, 5),
+            boardId: board.id,
+            title: newColumnTitle.trim(),
+            cardOrder: [],
+            cards: []
+        }
 
-    // const onColumnDrop = (dropResult) => {
+        let newColumns = [...columns]
+        newColumns.push(addColumnToAdd);
+        let newBroad = { ...board };
+        newBroad.columnOrder = newColumns.map(c => c.id);
+        newBroad.columns = newColumns;
 
-    //     let newColumns = [...columns];
-    //     newColumns = applyDrag(newColumns, dropResult);
+        console.log(newBroad);
 
-    //     let newBroad = { ...board };
-    //     newBroad.columnOrder = newColumns.map(c => c.id);
-    //     newBroad.columns = newColumns;
-
-    //     console.log(newBroad);
-
-    //     setColumns(newColumns);
-    //     setBoard(newBroad);
-    // }
-
-    // const onCardDrop = (columnId, dropResult) => {
-
-    //     if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-
-    //         let newColumns = [...columns];
-
-    //         let currentColumn = newColumns.find(c => c.id === columnId);
-
-    //         currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
-
-    //         currentColumn.cardOrder = currentColumn.cards.map(i => i.id);
-
-    //         console.log(currentColumn);
-    //         setColumns(newColumns);
-    //     }
-    // }
-
-    // const toggleOpenNewColumn = () => {
-    //     setOpenNewColumn(!openNewColumn);
-    // }
-
-
-    // const addNewColumn = () => {
-    //     if (!newColumnTitle) {
-    //         newColumInputRef.current.focus();
-    //         return
-    //     }
-
-    //     const addColumnToAdd = {
-    //         id: Math.random().toString(36).substring(2, 5),
-    //         boardId: board.id,
-    //         title: newColumnTitle.trim(),
-    //         cardOrder: [],
-    //         cards: []
-    //     }
-
-    //     let newColumns = [...columns]
-    //     newColumns.push(addColumnToAdd);
-    //     let newBroad = { ...board };
-    //     newBroad.columnOrder = newColumns.map(c => c.id);
-    //     newBroad.columns = newColumns;
-
-    //     console.log(newBroad);
-
-    //     setColumns(newColumns);
-    //     setBoard(newBroad);
-    //     setNewColumnTitle('');
-    //     toggleOpenNewColumn();
-    // }
+        setColumns(newColumns);
+        setBoard(newBroad);
+        setNewColumnTitle('');
+        toggleOpenNewColumn();
+    }
 
     return (
         <>
@@ -173,13 +173,13 @@ const BoardContent = () => {
                     dragHandleSelector=".column-drag-handle"
                     dragClass="column-ghost"
                     dropClass="column-ghost-drop"
-                    dropPlaceholder={{ 
+                    dropPlaceholder={{
                         animationDuration: 150,
                         showOnTop: true,
                         className: 'column-drop-preview'
                     }}
                 >
-                    {columns && columns.length > 0 && columns.map((column, index) => {
+                    {board && board.length > 0 && board.map((column, index) => {
                         return (
                             <Draggable key={column.id}>
                                 <Column

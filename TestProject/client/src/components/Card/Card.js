@@ -9,8 +9,6 @@ const Card = (props) => {
     const [rating, setRating] = useState(null);
 
     const [hover, setHover] = useState(null);
-
-
     return (
         <>
             <div className="card-item">
@@ -24,7 +22,7 @@ const Card = (props) => {
                                     const ratingValue = i + 1;
 
                                     return (
-                                        <label>
+                                        <label key={i}>
                                             <input
                                                 type='radio'
                                                 name='rating'
@@ -44,16 +42,16 @@ const Card = (props) => {
                         </header>
                     </a>
 
-                    {/* {card.image &&
+                    {card.image &&
                         <img className="card-cover" src={card.image}
                             onMouseDown={event => event.preventDefault()}
                         />
-                    } */}
+                    }
                     <span><i className="fa fa-circle icon"></i>
-                        {card.project_id}
+                        {card.project_id[1]}
                     </span>
                     <span><i className="fa fa-circle icon"></i>
-                        {card.user_id}
+                        {card.user_id[1]}
                     </span>
                     <div>
                         <span>

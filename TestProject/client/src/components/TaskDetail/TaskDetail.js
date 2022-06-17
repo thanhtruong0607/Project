@@ -1,16 +1,113 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './TaskDetail.scss';
 import { FaStar } from 'react-icons/fa';
 import StatusBar from "../StatusBar/StatusBar";
+import service from "../../service/axios";
 
 const TaskDetail = () => {
+
+    const [taskDetail, setTaskDetail] = useState([]);
 
     const [rating, setRating] = useState(null);
 
     const [hover, setHover] = useState(null);
 
+    useEffect(() => {
+        let fetchTaskDetailAPI = async () => {
+            let params = {
+                model: "project.task",
+                method: "read",
+                args: [
+                    [
+                        29
+                    ],
+                    [
+                        "stage_id",
+                        "count_done_issues",
+                        "count_project_issues",
+                        "subtask_done_count",
+                        "subtask_count",
+                        "duration_picker",
+                        "_domain_partner_as_internal_user",
+                        "is_internal_project",
+                        "id",
+                        "project_id",
+                        "team_id",
+                        "user_id",
+                        "supporter_ids",
+                        "creator_id",
+                        "report_to_ids",
+                        "date_end",
+                        "tag_ids",
+                        "date_finished",
+                        "parent_id",
+                        "create_uid",
+                        "level_tree",
+                        "company_id",
+                        "description",
+                        "checklist_task_instance_ids",
+                        "task_checklists",
+                        "has_checklist_task_instance_ids",
+                        "checklist_readonly",
+                        "planned_hours",
+                        "subtask_planned_hours",
+                        "progress",
+                        "timesheet_ids",
+                        "effective_hours",
+                        "subtask_effective_hours",
+                        "total_hours_spent",
+                        "remaining_hours",
+                        "sequence",
+                        "partner_id",
+                        "email_from",
+                        "email_cc",
+                        "child_ids",
+                        "subtask_project_id",
+                        "displayed_image_id",
+                        "date_assign",
+                        "date_last_stage_update",
+                        "working_hours_open",
+                        "working_days_open",
+                        "working_hours_close",
+                        "working_days_close",
+                        "plan_duration",
+                        "date_start",
+                        "date_deadline",
+                        "schedule_mode",
+                        "predecessor_ids",
+                        "task_resource_ids",
+                        "info_ids",
+                        "attachment_ids",
+                        "other_attachment_ids",
+                        "message_follower_ids",
+                        "activity_ids",
+                        "message_ids",
+                        "message_attachment_count",
+                        "display_name"
+                    ],
+                    0,
+                    0,
+                    ""
+                ],
+                kwargs: {},
+                context: {
+                    "tz": "Asia/Ho_Chi_Minh",
+                    "lang": "en_US"
+                }
+            };
+            let response = await service.post(params);
+
+            let data = response && response.data.result ? response.data.result : [];
+
+            setTaskDetail(data);
+
+        };
+        fetchTaskDetailAPI();
+    }, []);
+
     return (
         <>
+            {console.log(taskDetail)}
             <StatusBar />
             <div className="row task-detail ">
 

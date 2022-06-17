@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './Column.scss';
 import Card from "../Card/Card";
 import { mapOrder } from "../../utils/sorts";
 import { Container, Draggable } from "react-smooth-dnd";
+import service from "../../service/axios";
 
 const Column = (props) => {
 
     const { column, onCardDrop } = props;
 
-    const cards = mapOrder(column.cards, column.cardOrder, 'id');
-
+    console.log(column);
 
 
     return (
@@ -19,8 +19,8 @@ const Column = (props) => {
                 <div className="card-list">
                     <Container
                         groupName="col"
-                        onDrop={dropResult => onCardDrop(column.id, dropResult)}
-                        getChildPayload={index => cards[index]}
+                        // onDrop={dropResult => onCardDrop(column.id, dropResult)}
+                        // getChildPayload={index => cards[index]}
                         dragClass="card-ghost"
                         dropClass="card-ghost-drop"
                         dropPlaceholder={{
@@ -30,8 +30,8 @@ const Column = (props) => {
                         }}
                         dropPlaceholderAnimationDuration={200}
                     >
- 
-                        {cards && cards.length > 0 && cards.map((card, index) => {
+
+                        {column.data && column.data.length > 0 && column.data.map((card, index) => {
                             return (
                                 <Draggable key={card.id}>
                                     <Card card={card} />

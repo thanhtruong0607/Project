@@ -1,9 +1,9 @@
-// @import '../../settings';
+@import '../../settings';
 
-// .navbar-app {
-//     padding-left    : $gap;
-//     display         : flex;
-//     align-items     : center;
-//     background-color: $app-nav-bg-color;
-//     font-size       : 1.5rem;
-// }
+.navbar-app {
+    padding-left    : $gap;
+    display         : flex;
+    align-items     : center;
+    background-color: $app-nav-bg-color;
+    font-size       : 1.5rem;
+}
