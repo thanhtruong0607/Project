@@ -12,7 +12,7 @@ export const initData = {
                     cards: [
                         {
                             id: 'card-1',
-                            boardId: 'board-1',
+                            boardId: 'board-1', 
                             columnId: 'column-1',
                             title: 'Title of card 1',
                             name: 'MASTER 1',

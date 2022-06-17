@@ -17,7 +17,7 @@ const Card = (props) => {
                 <div className="item">
                     <a href="/detail">
                         <header>
-                            <span className='title-card'>{card.title}</span>
+                            <span className='title-card'>{card.name}</span>
                             <span>
                                 {[...Array(3)].map((star, i) => {
 
@@ -44,16 +44,16 @@ const Card = (props) => {
                         </header>
                     </a>
 
-                    {card.image &&
+                    {/* {card.image &&
                         <img className="card-cover" src={card.image}
                             onMouseDown={event => event.preventDefault()}
                         />
-                    }
+                    } */}
                     <span><i className="fa fa-circle icon"></i>
-                        {card.name}
+                        {card.project_id}
                     </span>
                     <span><i className="fa fa-circle icon"></i>
-                        {card.team_name}
+                        {card.user_id}
                     </span>
                     <div>
                         <span>

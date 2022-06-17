@@ -1,55 +1,55 @@
-@import '../../settings';
+// @import '../../settings';
 
-div.card-item {
-  background-color: white;
-  padding         : $gap;
-  border-radius   : $column-border-radius;
-  box-shadow      : 0 1px 1px rgba(0, 0, 0, 0.6);
+// div.card-item {
+//   background-color: white;
+//   padding         : $gap;
+//   border-radius   : $column-border-radius;
+//   box-shadow      : 0 1px 1px rgba(0, 0, 0, 0.6);
 
-  margin-bottom: $gap;
+//   margin-bottom: $gap;
 
-  .item {
-    color: #333;
-  }
+//   .item {
+//     color: #333;
+//   }
 
-  img {
-    display                : block;
-    width                  : calc(100% + 2*#{$gap});
-    margin                 : $gap 0 $gap (-$gap);
-    border-top-left-radius : $column-border-radius;
-    border-top-right-radius: $column-border-radius;
+//   img {
+//     display                : block;
+//     width                  : calc(100% + 2*#{$gap});
+//     margin                 : $gap 0 $gap (-$gap);
+//     border-top-left-radius : $column-border-radius;
+//     border-top-right-radius: $column-border-radius;
 
-  }
+//   }
 
-  .avatar {
-    padding-left: 90px;
-  }
+//   .avatar {
+//     padding-left: 90px;
+//   }
 
-  .avatars {
-    padding-left: 5px;
-  }
+//   .avatars {
+//     padding-left: 5px;
+//   }
 
 
-  span {
-    padding: 0px 10px;
+//   span {
+//     padding: 0px 10px;
 
-    .icon {
-      font-size: 0.7rem;
-      color    : blue;
-    }
-  }
+//     .icon {
+//       font-size: 0.7rem;
+//       color    : blue;
+//     }
+//   }
 
-  header {
-    span {
-      color: blue;
+//   header {
+//     span {
+//       color: blue;
 
-      label {
-        cursor: pointer;
+//       label {
+//         cursor: pointer;
 
-        input[type='radio'] {
-          display: none;
-        }
-      }
-    }
-  }
-}
+//         input[type='radio'] {
+//           display: none;
+//         }
+//       }
+//     }
+//   }
+// }

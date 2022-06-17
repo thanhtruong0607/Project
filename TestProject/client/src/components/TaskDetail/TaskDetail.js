@@ -33,7 +33,7 @@ const TaskDetail = () => {
                                 <label>Giai Đoạn Dự Án</label>
                             </td>
                             <td className='td_form'></td>
-                        </tr> 
+                        </tr>
                         <tr>
                             <td className='td_label'>
                                 <label>Assigned Team</label>

@@ -6,6 +6,8 @@ import NavBar from "../Navbar";
 
 const HomeScreen = () => {
 
+    const [board, setBoard] = useState({});
+
     const [rating, setRating] = useState(null);
 
     const [hover, setHover] = useState(null);
@@ -31,10 +33,9 @@ const HomeScreen = () => {
 
             const response = await service.post(params);
 
-            console.log(`3 -------`, response);
+            let data = response && response.data.result ? response.data.result : [];
 
-            return response.data;
-
+            setBoard(data);
 
         };
         fetchAPI();
@@ -43,80 +44,50 @@ const HomeScreen = () => {
 
     return (
         <>
+            {console.log(board)}
             <div>
                 <div className="project-card">
                     <nav><NavBar /></nav>
                     <nav className="navbar board">Project</nav>
                     <div className="project-columns">
-                        <a className="project" href="/task">
-                            <header>
-                                <span className="span_star">
-                                    {[...Array(1)].map((star, i) => {
+                        {board && board.length > 0 && board.map(item => {
+                            return (
+                                <a className="project" href="/task" key={item.id}>
+                                    <header>
+                                        <span className="span_star">
+                                            {[...Array(1)].map((star, i) => {
 
-                                        const ratingValue = i + 1;
+                                                const ratingValue = i + 1;
 
-                                        return (
-                                            <label>
-                                                <input
-                                                    type='radio'
-                                                    name='rating'
-                                                    value={ratingValue}
-                                                    onClick={() => setRating(ratingValue)}
-                                                />
-                                                <FaStar
-                                                    className='star'
-                                                    color={ratingValue <= (hover || rating) ? "#ffc107" : "#888888"}
-                                                    onMouseEnter={() => setHover(ratingValue)}
-                                                    onMouseLeave={() => setHover(null)}
-                                                />
-                                            </label>
-                                        )
-                                    })}
-                                </span>
-                                <span>XBOSS MOBILE ERP</span>
-                            </header>
-                            <ul>
-                                <div>Nguyễn Thành Đông</div>
-                                <div>(Đang thực hiện)</div>
-                                <span>Tasks</span>
-                                <span>Bảng chấm công</span>
-                            </ul>
-                        </a>
-                        <a className="project" href="/task">
-                            <header>
-                                <span className="span_star">
-                                    {[...Array(1)].map((star, i) => {
-
-                                        const ratingValue = i + 1;
-
-                                        return (
-                                            <label>
-                                                <input
-                                                    type='radio'
-                                                    name='rating'
-                                                    value={ratingValue}
-                                                    onClick={() => setRating(ratingValue)}
-                                                />
-                                                <FaStar
-                                                    className='star'
-                                                    color={ratingValue <= (hover || rating) ? "#ffc107" : "#888888"}
-                                                    onMouseEnter={() => setHover(ratingValue)}
-                                                    onMouseLeave={() => setHover(null)}
-                                                />
-                                            </label>
-                                        )
-                                    })}
-                                </span>
-                                <span>XBOSS MOBILE ERP</span>
-                            </header>
-                            <ul>
-                                <div>Nguyễn Thành Đông</div>
-                                <div>(Đang thực hiện)</div>
-                                <span>Tasks</span>
-                                <span>Bảng chấm công</span>
-                            </ul>
-                        </a>
-
+                                                return (
+                                                    <label>
+                                                        <input
+                                                            type='radio'
+                                                            name='rating'
+                                                            value={ratingValue}
+                                                            onClick={() => setRating(ratingValue)}
+                                                        />
+                                                        <FaStar
+                                                            className='star'
+                                                            color={ratingValue <= (hover || rating) ? "#ffc107" : "#888888"}
+                                                            onMouseEnter={() => setHover(ratingValue)}
+                                                            onMouseLeave={() => setHover(null)}
+                                                        />
+                                                    </label>
+                                                )
+                                            })}
+                                        </span>
+                                        <span>{item.name}</span>
+                                    </header>
+                                    <ul>
+                                        <div>{item.user_id[1]}</div>
+                                        <div>(Đang thực hiện)</div>
+                                        <span>{item.tasks.length} Tasks</span>
+                                        <span className="scss">Bảng chấm công</span>
+                                    </ul>
+                                </a>
+                            )
+                        })}
                     </div>
                 </div>
             </div>

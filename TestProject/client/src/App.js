@@ -4,7 +4,7 @@ import './App.scss';
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import Project from './screens/Project/Project';
 import LoginForm from './components/Login/LoginForm';
-import Task from './screens/Task';
+import Task from './screens/Task/Task';
 import NextStage from './components/NextStage/NextStage';
 import CheckList from './components/CheckList/CheckList';
 import TaskDetail from './components/TaskDetail/TaskDetail';

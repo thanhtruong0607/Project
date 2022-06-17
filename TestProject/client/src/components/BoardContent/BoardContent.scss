@@ -1,87 +1,87 @@
-@import '../../settings';
+// @import '../../settings';
 
 
-.board-columns {
-  margin    : 0 $gap $gap 0;
-  display   : flex;
-  overflow-x: auto;
-  gap       : 10px;
+// .board-columns {
+//   margin    : 0 $gap $gap 0;
+//   display   : flex;
+//   overflow-x: auto;
+//   gap       : 10px;
 
-  &::after {
-    content: '';
-    flex   : 0 0 $gap;
-  }
+//   &::after {
+//     content: '';
+//     flex   : 0 0 $gap;
+//   }
 
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-  }
+//   &::-webkit-scrollbar {
+//     -webkit-appearance: none;
+//   }
 
-  &::-webkit-scrollbar:horizontal {
-    height: 11px;
-  }
+//   &::-webkit-scrollbar:horizontal {
+//     height: 11px;
+//   }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, .24);
-    border-radius   : 5px solid $list-bg-color;
-  }
+//   &::-webkit-scrollbar-thumb {
+//     background-color: rgba(255, 255, 255, .24);
+//     border-radius   : 5px solid $list-bg-color;
+//   }
 
-  .column-drop-preview {
-    background-color: rgba(150, 150, 200, 0.1);
-    border          : 1px dashed #abc;
-    margin          : 5px 45px 5px 5px;
-  }
+//   .column-drop-preview {
+//     background-color: rgba(150, 150, 200, 0.1);
+//     border          : 1px dashed #abc;
+//     margin          : 5px 45px 5px 5px;
+//   }
 
-  .column-ghost {
-    transition: transform 0.18s ease;
-    transform : rotateZ(-5deg);
-  }
+//   .column-ghost {
+//     transition: transform 0.18s ease;
+//     transform : rotateZ(-5deg);
+//   }
 
-  .column-ghost-drop {
-    transition: transform 0.18s ease-in-out;
-    transform : rotateZ(5deg);
-  }
+//   .column-ghost-drop {
+//     transition: transform 0.18s ease-in-out;
+//     transform : rotateZ(5deg);
+//   }
 
-  .add-column {
-    width           : 250px;
-    max-width       : 250px;
-    line-height     : 30px;
-    padding         : 4px 0 4px 15px;
-    cursor          : pointer;
-    font-weight     : bold;
-    color           : #888;
-    font-size       : 15px;
-    background-color: rgba(221, 221, 236, 0.849);
-    border-radius   : $column-border-radius;
+//   .add-column {
+//     width           : 250px;
+//     max-width       : 250px;
+//     line-height     : 30px;
+//     padding         : 4px 0 4px 15px;
+//     cursor          : pointer;
+//     font-weight     : bold;
+//     color           : #888;
+//     font-size       : 15px;
+//     background-color: rgba(252, 252, 252, 0.849);
+//     border-radius   : $column-border-radius;
 
-    &:hover {
-      color: black;
-    }
-  }
+//     &:hover {
+//       color: black;
+//     }
+//   }
 
-  .enter-new-column {
-    width           : 250px;
-    max-width       : 250px;
-    background-color: $list-bg-color;
-    line-height     : 30px;
-    padding         : 4px 10px;
-    border-radius   : $column-border-radius;
+//   .enter-new-column {
+//     width           : 250px;
+//     max-width       : 250px;
+//     background-color: $list-bg-color;
+//     line-height     : 30px;
+//     padding         : 4px 10px;
+//     border-radius   : $column-border-radius;
 
-    input.input-enter-new-column {
-      margin: 5px 0;
-    }
+//     input.input-enter-new-column {
+//       margin: 5px 0;
+//     }
 
-    span.cancel-new-column {
-      cursor: pointer;
+//     span.cancel-new-column {
+//       cursor: pointer;
 
-      i {
-        color    : $alert-danger;
-        font-size: 20px;
+//       i {
+//         color    : $alert-danger;
+//         font-size: 20px;
 
-        &:hover {
-          color: darken($alert-danger, 20);
-        }
-      }
-    }
-  }
+//         &:hover {
+//           color: darken($alert-danger, 20);
+//         }
+//       }
+//     }
+//   }
 
-}
+// }

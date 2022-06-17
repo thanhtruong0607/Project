@@ -18,15 +18,6 @@ const Column = (props) => {
                 <header className="column-drag-handle">{column.title}</header>
                 <div className="card-list">
                     <Container
-                        // onDragStart={e => console.log("drag started", e)}
-                        // onDragEnd={e => console.log("drag end", e)}
-                        // onDragEnter={() => {
-                        //     console.log("drag enter:", column.id);
-                        // }}
-                        // onDragLeave={() => {
-                        //     console.log("drag leave:", column.id);
-                        // }}
-                        // onDropReady={p => console.log('Drop ready: ', p)}
                         groupName="col"
                         onDrop={dropResult => onCardDrop(column.id, dropResult)}
                         getChildPayload={index => cards[index]}
@@ -39,7 +30,7 @@ const Column = (props) => {
                         }}
                         dropPlaceholderAnimationDuration={200}
                     >
-
+ 
                         {cards && cards.length > 0 && cards.map((card, index) => {
                             return (
                                 <Draggable key={card.id}>

@@ -11,7 +11,7 @@ import { Container as BootstrapContainer, Row, Col, Form, Button } from "react-b
 
 const BoardContent = () => {
 
-    const [board, setBoard] = useState({});
+    const [board, setBoard] = useState([]);
     const [columns, setColumns] = useState([]);
     const [openNewColumn, setOpenNewColumn] = useState(false);
     const [newColumnTitle, setNewColumnTitle] = useState('');
@@ -21,110 +21,159 @@ const BoardContent = () => {
     const onNewColumnTitleChange = useCallback((e) => setNewColumnTitle(e.target.value), []);
 
     useEffect(() => {
-        
-        const boardInitData = initData.boards.find(item => item.id === 'board-1');
-        if (boardInitData) {
-            setBoard(boardInitData);
+        let fetchTaskAPI = async () => {
+            let params = {
+                model: "project.task",
+                method: "search_read",
+                args: [
+                    [],
+                    [
+                        "message_needaction",
+                        "sequence",
+                        "task_number",
+                        "create_date",
+                        "priority",
+                        "name",
+                        "creator_id",
+                        "write_date",
+                        "date_deadline",
+                        "date_end",
+                        "product_backlog_id",
+                        "sprint_id",
+                        "release_id",
+                        "project_id",
+                        "user_id",
+                        "milestone_id",
+                        "planned_hours",
+                        "remaining_hours",
+                        "effective_hours",
+                        "stage_id",
+                        "duration",
+                        "progress",
+                        "checklist_task_instance_ids"
+                    ],
+                    0,
+                    0,
+                    ""
+                ],
+                kwargs: {},
+                context: {
+                    "tz": "Asia/Ho_Chi_Minh",
+                    "lang": "en_US"
+                }
+            };
+            const response = await service.post(params);
 
-            // sort column 
-            // boardInitData.columns.sort((a, b) => 
-            // boardInitData.columnOrder.indexOf(a.id) - boardInitData.columnOrder.indexOf(b.id))
-            setColumns(mapOrder(boardInitData.columns, boardInitData.columnOrder, 'id'));
+            let dataTask = response && response.data.result ? response.data.result : [];
+
+            setBoard(dataTask);
+
 
         }
+        fetchTaskAPI();
     }, []);
 
-    useEffect(() => {
-        if (newColumInputRef && newColumInputRef.current) {
-            newColumInputRef.current.focus();
-            newColumInputRef.current.select();
-        }
-    }, [openNewColumn])
-
-    if (_.isEmpty(board)) {
-        return (
-            <>
-                <div className="not-found">Board not found</div>
-            </>
-        )
-    }
-
-    const onColumnDrop = (dropResult) => {
-
-        let newColumns = [...columns];
-        newColumns = applyDrag(newColumns, dropResult);
-
-        let newBroad = { ...board };
-        newBroad.columnOrder = newColumns.map(c => c.id);
-        newBroad.columns = newColumns;
-
-        console.log(newBroad);
-
-        setColumns(newColumns);
-        setBoard(newBroad);
-    }
-
-    const onCardDrop = (columnId, dropResult) => {
-
-        if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-
-            let newColumns = [...columns];
-
-            let currentColumn = newColumns.find(c => c.id === columnId);
-
-            currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
-
-            currentColumn.cardOrder = currentColumn.cards.map(i => i.id);
-
-            console.log(currentColumn);
-            setColumns(newColumns);
-        }
-    }
-
-    const toggleOpenNewColumn = () => {
-        setOpenNewColumn(!openNewColumn);
-    }
+    // const boardInitData = initData.boards.find(item => item.id === 'board-1');
+    // if (boardInitData) {
+    //     setBoard(boardInitData);
+    //     // sort column 
+    //     // boardInitData.columns.sort((a, b) => 
+    //     // boardInitData.columnOrder.indexOf(a.id) - boardInitData.columnOrder.indexOf(b.id))
+    //     setColumns(mapOrder(boardInitData.columns, boardInitData.columnOrder, 'id'));
+    // }
 
 
-    const addNewColumn = () => {
-        if (!newColumnTitle) {
-            newColumInputRef.current.focus();
-            return
-        }
+    // useEffect(() => {
+    //     if (newColumInputRef && newColumInputRef.current) {
+    //         newColumInputRef.current.focus();
+    //         newColumInputRef.current.select();
+    //     }
+    // }, [openNewColumn])
 
-        const addColumnToAdd = {
-            id: Math.random().toString(36).substring(2, 5),
-            boardId: board.id,
-            title: newColumnTitle.trim(),
-            cardOrder: [],
-            cards: []
-        }
+    // if (_.isEmpty(board)) {
+    //     return (
+    //         <>
+    //             <div className="not-found">Board not found</div>
+    //         </>
+    //     )
+    // }
 
-        let newColumns = [...columns]
-        newColumns.push(addColumnToAdd);
-        let newBroad = { ...board };
-        newBroad.columnOrder = newColumns.map(c => c.id);
-        newBroad.columns = newColumns;
+    // const onColumnDrop = (dropResult) => {
 
-        console.log(newBroad);
+    //     let newColumns = [...columns];
+    //     newColumns = applyDrag(newColumns, dropResult);
 
-        setColumns(newColumns);
-        setBoard(newBroad);
-        setNewColumnTitle('');
-        toggleOpenNewColumn();
-    }
+    //     let newBroad = { ...board };
+    //     newBroad.columnOrder = newColumns.map(c => c.id);
+    //     newBroad.columns = newColumns;
+
+    //     console.log(newBroad);
+
+    //     setColumns(newColumns);
+    //     setBoard(newBroad);
+    // }
+
+    // const onCardDrop = (columnId, dropResult) => {
+
+    //     if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+
+    //         let newColumns = [...columns];
+
+    //         let currentColumn = newColumns.find(c => c.id === columnId);
+
+    //         currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
+
+    //         currentColumn.cardOrder = currentColumn.cards.map(i => i.id);
+
+    //         console.log(currentColumn);
+    //         setColumns(newColumns);
+    //     }
+    // }
+
+    // const toggleOpenNewColumn = () => {
+    //     setOpenNewColumn(!openNewColumn);
+    // }
+
+
+    // const addNewColumn = () => {
+    //     if (!newColumnTitle) {
+    //         newColumInputRef.current.focus();
+    //         return
+    //     }
+
+    //     const addColumnToAdd = {
+    //         id: Math.random().toString(36).substring(2, 5),
+    //         boardId: board.id,
+    //         title: newColumnTitle.trim(),
+    //         cardOrder: [],
+    //         cards: []
+    //     }
+
+    //     let newColumns = [...columns]
+    //     newColumns.push(addColumnToAdd);
+    //     let newBroad = { ...board };
+    //     newBroad.columnOrder = newColumns.map(c => c.id);
+    //     newBroad.columns = newColumns;
+
+    //     console.log(newBroad);
+
+    //     setColumns(newColumns);
+    //     setBoard(newBroad);
+    //     setNewColumnTitle('');
+    //     toggleOpenNewColumn();
+    // }
 
     return (
         <>
+            {console.log(board)}
             <div className='board-columns'>
                 <Container
                     orientation="horizontal"
-                    onDrop={onColumnDrop}
                     getChildPayload={index => columns[index]}
                     dragHandleSelector=".column-drag-handle"
                     dragClass="column-ghost"
                     dropClass="column-ghost-drop"
-                    dropPlaceholder={{
+                    dropPlaceholder={{ 
                         animationDuration: 150,
                         showOnTop: true,
                         className: 'column-drop-preview'
@@ -134,13 +183,13 @@ const BoardContent = () => {
                         return (
                             <Draggable key={column.id}>
                                 <Column
-                                    column={column} onCardDrop={onCardDrop}
+                                    column={column}
                                 />
                             </Draggable>
                         )
                     })}
                 </Container>
-                <BootstrapContainer className="trello-container">
+                {/* <BootstrapContainer className="trello-container">
                     {!openNewColumn &&
                         <Row>
                             <Col className="add-column" onClick={toggleOpenNewColumn}>
@@ -167,7 +216,7 @@ const BoardContent = () => {
                         </Row>
                     }
 
-                </BootstrapContainer>
+                </BootstrapContainer> */}
             </div>
         </>
     )
