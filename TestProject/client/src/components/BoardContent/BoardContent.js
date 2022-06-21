@@ -76,8 +76,6 @@ const BoardContent = () => {
                 }
             })
             setBoard(board);
-
-
         }
         fetchTaskAPI();
     }, []);
@@ -111,6 +109,7 @@ const BoardContent = () => {
 
         setColumns(newColumns);
         setBoard(newBroad);
+        console.log(dropResult);
     }
 
     const onCardDrop = (columnId, dropResult) => {
@@ -169,7 +168,8 @@ const BoardContent = () => {
             <div className='board-columns'>
                 <Container
                     orientation="horizontal"
-                    getChildPayload={index => columns[index]}
+                    onDrop={onColumnDrop}
+                    getChildPayload={index => board[index]}
                     dragHandleSelector=".column-drag-handle"
                     dragClass="column-ghost"
                     dropClass="column-ghost-drop"
@@ -189,7 +189,7 @@ const BoardContent = () => {
                         )
                     })}
                 </Container>
-                {/* <BootstrapContainer className="trello-container">
+                <BootstrapContainer className="trello-container">
                     {!openNewColumn &&
                         <Row>
                             <Col className="add-column" onClick={toggleOpenNewColumn}>
@@ -216,7 +216,7 @@ const BoardContent = () => {
                         </Row>
                     }
 
-                </BootstrapContainer> */}
+                </BootstrapContainer>
             </div>
         </>
     )

@@ -47,10 +47,10 @@ const Card = (props) => {
                             onMouseDown={event => event.preventDefault()}
                         />
                     }
-                    <span><i className="fa fa-circle icon"></i>
+                    <span className="set-icon"><i className="fa fa-circle icon"></i>
                         {card.project_id[1]}
                     </span>
-                    <span><i className="fa fa-circle icon"></i>
+                    <span className="set-icon"><i className="fa fa-circle icon"></i>
                         {card.user_id[1]}
                     </span>
                     <div>

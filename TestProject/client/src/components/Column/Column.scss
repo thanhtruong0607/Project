@@ -2,7 +2,7 @@
 
 .column {
   flex  : 0 0 auto;
-  width : 300px;
+  width : 360px;
   height: calc(100vh - 40px - 50px - #{$gap});
 
   margin-left: $gap;

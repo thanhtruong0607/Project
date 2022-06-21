@@ -1,26 +1,31 @@
-.task-detail {
-    width  : 97%;
-    border : 1px solid rgb(15, 15, 15);
-    padding: 10px;
-    margin : 30px 20px;
+.task-master {
 
-    .table-detail {
-        margin: 20px 0 20px 0;
+    .task-detail {
+        width           : 97%;
+        border          : 1px solid rgb(15, 15, 15);
+        background-color: rgb(181, 198, 230);
+        padding         : 10px;
+        margin          : 30px 20px;
 
-        .td_label {
-            padding-left: 15px;
-            font-weight : 500;
-        }
 
-        .td_form {
-            padding-left: 40px;
+        .table-detail {
+            margin: 20px 0 20px 0;
 
-            span {
-                label {
-                    cursor: pointer;
+            .td_label {
+                padding-left: 15px;
+                font-weight : 500;
+            }
 
-                    input[type='radio'] {
-                        display: none;
+            .td_form {
+                padding-left: 40px;
+
+                span {
+                    label {
+                        cursor: pointer;
+
+                        input[type='radio'] {
+                            display: none;
+                        }
                     }
                 }
             }
