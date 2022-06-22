@@ -9,7 +9,7 @@ import { Container, Draggable } from "react-smooth-dnd";
 import service from "../../service/axios";
 import { Container as BootstrapContainer, Row, Col, Form, Button } from "react-bootstrap";
 
-const BoardContent = () => {
+const BoardContent = ({ project_id }) => {
 
     const [board, setBoard] = useState([]);
     const [columns, setColumns] = useState([]);
@@ -26,7 +26,9 @@ const BoardContent = () => {
                 model: "project.task",
                 method: "search_read",
                 args: [
-                    [],
+                    [
+                        ["project_id", "=", project_id]
+                    ],
                     [
                         "message_needaction",
                         "sequence",
@@ -91,7 +93,7 @@ const BoardContent = () => {
     if (_.isEmpty(board)) {
         return (
             <>
-                <div className="not-found">Board not found</div>
+                <div className="not-found"></div>
             </>
         )
     }
@@ -111,6 +113,10 @@ const BoardContent = () => {
         setBoard(newBroad);
         console.log(dropResult);
     }
+
+    // const onColumnDrop = (dropResult => {
+    //     console.log(dropResult);
+    // })
 
     const onCardDrop = (columnId, dropResult) => {
 

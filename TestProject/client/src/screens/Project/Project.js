@@ -42,9 +42,10 @@ const HomeScreen = () => {
 
     }, []);
 
+
     return (
         <>
-            {console.log(board)}
+            {console.log(board)} 
             <div>
                 <div className="project-card">
                     <nav><NavBar /></nav>
@@ -52,7 +53,7 @@ const HomeScreen = () => {
                     <div className="project-columns">
                         {board && board.length > 0 && board.map(item => {
                             return (
-                                <a className="project" href="/task" key={item.id}>
+                                <a className="project" href={`/task/${item.id}`} key={item.id}>
                                     <header>
                                         <span className="span_star">
                                             {[...Array(1)].map((star, i) => {

@@ -9,11 +9,12 @@ const Card = (props) => {
     const [rating, setRating] = useState(null);
 
     const [hover, setHover] = useState(null);
+    let test = `/detail/${card.id}`
     return (
         <>
             <div className="card-item">
                 <div className="item">
-                    <a href="/detail">
+                    <a href={test} >
                         <header>
                             <span className='title-card'>{card.name}</span>
                             <span>
@@ -55,7 +56,7 @@ const Card = (props) => {
                     </span>
                     <div>
                         <span>
-                            <a className="fa fa-paper-plane-o" href="/next"></a>
+                            <a className="fa fa-paper-plane-o" href="/next" ></a>
                         </span>
                         <span>
                             <a className="fa fa-check-square-o" href="/check"></a>

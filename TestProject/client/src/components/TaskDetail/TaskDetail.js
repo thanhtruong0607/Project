@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom'
 import './TaskDetail.scss';
 import { FaStar } from 'react-icons/fa';
 import StatusBar from "../StatusBar/StatusBar";
 import service from "../../service/axios";
+import Tag from "../Tag/Tag";
+import Select from 'react-select';
+import DatePicker from 'react-datepicker';
 
-const TaskDetail = () => {
+const TaskDetail = (props) => {
 
     const [taskDetail, setTaskDetail] = useState([]);
 
@@ -12,14 +16,22 @@ const TaskDetail = () => {
 
     const [hover, setHover] = useState(null);
 
+    let route_params = useParams();
+
+    const [isEdit, setEdit] = useState(false);
+
+    const [selectedDate, setSelectedDate] = useState(null);
+
     useEffect(() => {
+
         let fetchTaskDetailAPI = async () => {
+            console.log(`gfg:`, route_params)
             let params = {
                 model: "project.task",
                 method: "read",
                 args: [
                     [
-                        24
+                        parseInt(route_params.id)
                     ],
                     [
                         "stage_id",
@@ -84,10 +96,7 @@ const TaskDetail = () => {
                         "message_ids",
                         "message_attachment_count",
                         "display_name"
-                    ],
-                    0,
-                    0,
-                    ""
+                    ]
                 ],
                 kwargs: {},
                 context: {
@@ -104,115 +113,92 @@ const TaskDetail = () => {
         };
         fetchTaskDetailAPI();
     }, []);
-
+    const onEdit = () => {
+        setEdit(!isEdit);
+    }
+    const teamList = [
+        { value: 1, label: "Office Design" },
+        { value: 2, label: "Research & Development" },
+        { value: 3, label: "Your Company" }
+    ];
+    const dataList = [
+        { value: 1, label: "Azure Interior" },
+        { value: 2, label: "Azure Interior, Brandon Freeman" },
+        { value: 3, label: "Azure Interior, Colleen Diaz" },
+        { value: 4, label: "Azure Interior, Nicole Ford" },
+        { value: 5, label: "Blue" },
+        { value: 6, label: "Company_1" },
+        { value: 7, label: "Company_2" }
+    ];
     return (
         <>
             <div className="task-master">
+                <button className="btn o_arrow_button btn-secondary edit" type="button" onClick={onEdit}>
+                    {isEdit ? 'CANCEL EDIT' : 'EDIT'}
+                </button>
+
                 {console.log(taskDetail)}
                 {taskDetail && taskDetail.length > 0 && taskDetail.map(detail => {
                     return (
                         <div key={detail.id}>
-                            <StatusBar />
+                            <StatusBar stages={detail.stage_id} />
                             <div className="row task-detail ">
 
-                                <h2>
-                                    PROJECT TEST
-                                </h2>
+
+                                {isEdit ? <input value={detail.display_name} /> : <h2>
+                                    {detail.display_name}
+                                </h2>}
+
 
                                 <table className='table-detail col-sm-6'>
                                     <tbody>
                                         <tr>
                                             <td className='td_label'>
-                                                <label>Dự Án</label>
+                                                <label>Team</label>
                                             </td>
-                                            <td className='td_form'>
-                                                <a href='https://uat.xboss.com/web#id=17&model=project.project&menu_id='>{detail.display_name}</a>
-                                            </td>
+                                            {isEdit ? <Select placeholder={detail.team_id[1]} options={teamList} /> : <td className='td_form'>
+                                                {detail.team_id[1]}
+                                            </td>}
+
                                         </tr>
                                         <tr>
                                             <td className='td_label'>
-                                                <label>Giai Đoạn Dự Án</label>
+                                                <label>Assigned To</label>
                                             </td>
-                                            <td className='td_form'></td>
+                                            {isEdit ? <Select placeholder={detail.user_id[1]} /> : <td className='td_form'>
+                                                {detail.user_id[1]}
+                                            </td>}
+                                        </tr>
+
+                                        <tr>
+                                            <td className='td_label'>
+                                                <label>Supporters</label>
+                                            </td>
+                                            {isEdit ? <Select options={dataList} /> : <td className='td_form'>
+                                                {detail.supporter_ids[1]}
+                                            </td>}
+                                        </tr>
+
+                                        <tr>
+                                            <td className='td_label'>
+                                                <label>Assigned By</label>
+                                            </td>
+
+                                            {isEdit ? <Select placeholder={detail.creator_id[1]} options={dataList} /> : <td className='td_form'>
+                                                {detail.creator_id[1]}
+
+                                            </td>}
                                         </tr>
                                         <tr>
                                             <td className='td_label'>
-                                                <label>Assigned Team</label>
+                                                <label>Report To</label>
                                             </td>
-                                            <td className='td_form'></td>
+                                            {isEdit ? <Select options={dataList} /> : <td className='td_form'>
+                                                {detail.report_to_ids[1]}
+
+                                            </td>}
                                         </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Người Thực Hiện</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <a href='https://uat.xboss.com/web#id=190&model=res.users&view_type=form&menu_id=1290'>Lâm Thành Long</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Assigned Resources</label>
-                                            </td>
-                                            <td className='td_form'></td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Done %</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span>0</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Start Date</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span>{detail.date_start}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>End Date</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span>{detail.date_end}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Effort(Hours)</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span>0</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Người Hỗ Trợ </label>
-                                            </td>
-                                            <td className='td_form'></td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Người Báo Cáo</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <a href='https://uat.xboss.com/web#id=1280&model=res.partner'>0100109106 - Tập Đoàn Công Nghiệp - Viễn Thông Quân Đội</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Need Install</label>
-                                            </td>
-                                            <td className='td_form'></td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Milestones</label>
-                                            </td>
-                                            <td className='td_form'></td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
 
@@ -222,15 +208,22 @@ const TaskDetail = () => {
                                             <td className='td_label'>
                                                 <label>Deadline</label>
                                             </td>
-                                            <td className='td_form'>
-                                                <span>{detail.date_last_stage_update}</span>
-                                            </td>
+
+                                            {isEdit ? <DatePicker selected={selectedDate}
+                                                onChange={date => setSelectedDate(date)}
+                                                dateFormat='dd/MM/yyyy' showYearDropdown scrollableMonthYearDropdown /> : <td className='td_form'>
+                                                {detail.date_last_stage_update}
+
+                                            </td>}
                                         </tr>
                                         <tr>
                                             <td className='td_label'>
                                                 <label>Độ Khó</label>
                                             </td>
-                                            <td className='td_form'></td>
+                                            <td className='td_form'>
+                                                {detail.level_tree}
+
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td className='td_label'>
@@ -264,94 +257,22 @@ const TaskDetail = () => {
                                         </tr>
                                         <tr>
                                             <td className='td_label'>
+                                                <label>Created By</label>
+                                            </td>
+                                            <td className='td_form'>
+                                                {detail.create_uid[1]}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className='td_label'>
                                                 <label>Thẻ Phân Loại</label>
                                             </td>
                                             <td className='td_form'>
-                                                <a className="badge rounded-pill bg-warning" href='#' role='button'>INVOICE</a>
-                                                <a className="badge rounded-pill bg-warning" href='#' role='button'>HR</a>
-                                                <a className="badge rounded-pill bg-danger" href='#' role='button'>FRM</a>
-                                                <a className="badge rounded-pill bg-secondary" href='#' role='button'>PURCHASE ORDER</a>
-                                                <a className="badge rounded-pill bg-success" href='#' role='button'>PURCHASE RIQUISITION</a>
-                                                <a className="badge rounded-pill bg-white text-dark btn btn-outline-dark" href='#' role='button'>Form</a>
+                                                <Tag ids={detail.tag_ids} />
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Scheduling Mode</label>
-                                            </td>
-                                            <td className='td_form'></td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Constraint Type</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Constraint Date</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Effort Driven</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span className='fa fa-square-o'></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Manually Scheduled</label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span className='fa fa-check-square'></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Loại Task <i className='fa fa-question-circle'></i></label>
-                                            </td>
-                                            <td className='td_form'>
-                                                <span>Báo lỗi</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Yêu Cầu <i className='fa fa-question-circle'></i></label>
-                                            </td>
-                                            <td className='td_form'>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Sprint</label>
-                                            </td>
-                                            <td className='td_form'></td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Release</label>
-                                            </td>
-                                            <td className='td_form'></td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Loại</label>
-                                            </td>
-                                            <td className='td_form'></td>
-                                        </tr>
-                                        <tr>
-                                            <td className='td_label'>
-                                                <label>Ngày Hoàn Thành</label>
-                                            </td>
-                                            <td className='td_form'></td>
+                                            {/* {isEdit ? <input value={<Tag ids={detail.tag_ids} />}/> : <td className='td_form'>
+                                                <Tag ids={detail.tag_ids} />
+                                            </td> */}
                                         </tr>
                                     </tbody>
                                 </table>

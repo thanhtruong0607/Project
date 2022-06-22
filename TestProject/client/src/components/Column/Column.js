@@ -7,7 +7,7 @@ import service from "../../service/axios";
 
 const Column = (props) => {
 
-    const { column } = props;
+    const { column, onCardDrop } = props;
 
     console.log(column);
 
@@ -20,7 +20,7 @@ const Column = (props) => {
                     <Container
                         groupName="col"
                         // onDrop={dropResult => onCardDrop(column.id, dropResult)}
-                        // getChildPayload={index => column[index]}
+                        // getChildPayload={index => column[id]}
                         dragClass="card-ghost"
                         dropClass="card-ghost-drop"
                         dropPlaceholder={{
