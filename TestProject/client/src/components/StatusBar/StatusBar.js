@@ -3,7 +3,7 @@ import './StatusBar.scss'
 
 const StatusBar = ({ stages }) => {
     return (
-        <nav className="form-status navbar-expand-lg shadow-lg p-2 mb-4 rounded">
+        <nav className="form-status navbar-expand-lg shadow-lg p-1 mb-4 rounded">
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">

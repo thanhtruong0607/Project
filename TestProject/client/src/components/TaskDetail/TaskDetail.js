@@ -7,6 +7,11 @@ import service from "../../service/axios";
 import Tag from "../Tag/Tag";
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
+import Team from '../Team/Team';
+import ReportTo from '../ReportTo/ReportTo';
+import Tags from '../Tags/Tags';
+import Supporters from '../Supporters/Supporters';
+import AssignedBy from '../AssignedBy/AssignedBy';
 
 const TaskDetail = (props) => {
 
@@ -22,8 +27,9 @@ const TaskDetail = (props) => {
 
     const [selectedDate, setSelectedDate] = useState(null);
 
-    useEffect(() => {
+    const [selectedOption, setSelectedOption] = useState(null);
 
+    useEffect(() => {
         let fetchTaskDetailAPI = async () => {
             console.log(`gfg:`, route_params)
             let params = {
@@ -113,8 +119,9 @@ const TaskDetail = (props) => {
         };
         fetchTaskDetailAPI();
     }, []);
-    const onEdit = () => {
+    const onEdit = (type) => {
         setEdit(!isEdit);
+        console.log(type)
     }
     const teamList = [
         { value: 1, label: "Office Design" },
@@ -130,11 +137,15 @@ const TaskDetail = (props) => {
         { value: 6, label: "Company_1" },
         { value: 7, label: "Company_2" }
     ];
+
     return (
         <>
             <div className="task-master">
-                <button className="btn o_arrow_button btn-secondary edit" type="button" onClick={onEdit}>
-                    {isEdit ? 'CANCEL EDIT' : 'EDIT'}
+                <button className="btn o_arrow_button btn-secondary edit-button " type="button" onClick={onEdit}>
+                    {isEdit ? 'CANCLE' : 'EDIT'}
+                </button>
+                <button className="btn o_arrow_button btn-secondary save-button " type="button" onClick={onEdit}>
+                    SAVE
                 </button>
 
                 {console.log(taskDetail)}
@@ -145,7 +156,9 @@ const TaskDetail = (props) => {
                             <div className="row task-detail ">
 
 
-                                {isEdit ? <input value={detail.display_name} /> : <h2>
+                                {isEdit ? <input type="text" value={detail.display_name} placeholder={detail.display_name}
+                                    defaultValue={selectedOption}
+                                    onChange={setSelectedOption} /> : <h2>
                                     {detail.display_name}
                                 </h2>}
 
@@ -156,16 +169,23 @@ const TaskDetail = (props) => {
                                             <td className='td_label'>
                                                 <label>Team</label>
                                             </td>
-                                            {isEdit ? <Select placeholder={detail.team_id[1]} options={teamList} /> : <td className='td_form'>
-                                                {detail.team_id[1]}
-                                            </td>}
+                                            {isEdit ? <Select placeholder={detail.team_id[1]}
+                                                defaultValue={selectedOption}
+                                                onChange={setSelectedOption}
+                                                options={teamList} /> :
+                                                <td className='td_form'>
+                                                    {detail.team_id[1]}
+                                                </td>
+                                            }
 
                                         </tr>
                                         <tr>
                                             <td className='td_label'>
                                                 <label>Assigned To</label>
                                             </td>
-                                            {isEdit ? <Select placeholder={detail.user_id[1]} /> : <td className='td_form'>
+                                            {isEdit ? <Select placeholder={detail.user_id[1]}
+                                                defaultValue={selectedOption}
+                                                onChange={setSelectedOption} /> : <td className='td_form'>
                                                 {detail.user_id[1]}
                                             </td>}
                                         </tr>
@@ -174,7 +194,8 @@ const TaskDetail = (props) => {
                                             <td className='td_label'>
                                                 <label>Supporters</label>
                                             </td>
-                                            {isEdit ? <Select options={dataList} /> : <td className='td_form'>
+                                            {isEdit ? <Select options={dataList}
+                                            /> : <td className='td_form'>
                                                 {detail.supporter_ids[1]}
                                             </td>}
                                         </tr>
@@ -184,7 +205,10 @@ const TaskDetail = (props) => {
                                                 <label>Assigned By</label>
                                             </td>
 
-                                            {isEdit ? <Select placeholder={detail.creator_id[1]} options={dataList} /> : <td className='td_form'>
+                                            {isEdit ? <Select placeholder={detail.creator_id[1]}
+                                                defaultValue={selectedOption}
+                                                onChange={setSelectedOption}
+                                                options={dataList} /> : <td className='td_form'>
                                                 {detail.creator_id[1]}
 
                                             </td>}
@@ -193,9 +217,10 @@ const TaskDetail = (props) => {
                                             <td className='td_label'>
                                                 <label>Report To</label>
                                             </td>
-                                            {isEdit ? <Select options={dataList} /> : <td className='td_form'>
+                                            {isEdit ? <Select options={dataList}
+                                                defaultValue={selectedOption}
+                                                onChange={setSelectedOption} /> : <td className='td_form'>
                                                 {detail.report_to_ids[1]}
-
                                             </td>}
                                         </tr>
 
@@ -211,10 +236,10 @@ const TaskDetail = (props) => {
 
                                             {isEdit ? <DatePicker selected={selectedDate}
                                                 onChange={date => setSelectedDate(date)}
-                                                dateFormat='dd/MM/yyyy' showYearDropdown scrollableMonthYearDropdown /> : <td className='td_form'>
-                                                {detail.date_last_stage_update}
-
-                                            </td>}
+                                                dateFormat='dd/MM/yyyy' showYearDropdown scrollableMonthYearDropdown /> :
+                                                <td className='td_form'>
+                                                    {detail.date_last_stage_update}
+                                                </td>}
                                         </tr>
                                         <tr>
                                             <td className='td_label'>
@@ -272,7 +297,7 @@ const TaskDetail = (props) => {
                                             </td>
                                             {/* {isEdit ? <input value={<Tag ids={detail.tag_ids} />}/> : <td className='td_form'>
                                                 <Tag ids={detail.tag_ids} />
-                                            </td> */}
+                                            </td>} */}
                                         </tr>
                                     </tbody>
                                 </table>

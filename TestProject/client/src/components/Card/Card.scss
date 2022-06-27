@@ -3,17 +3,17 @@
 div.card-item {
     background-color: white;
     height          : 130px;
-    padding         : 15px 0 10px 0;
+    padding         : 7px 0 10px 0;
     border-radius   : $column-border-radius;
     box-shadow      : 1px 2px 2px rgba(0, 0, 0, 0.9);
     margin-bottom   : 10px;
 
     .title-card {
-        font-weight: 400;
+        font-weight: 500;
     }
 
     .item {
-        color: rgb(10, 9, 9);
+        color: rgb(9, 9, 10);
     }
 
     img {
@@ -38,18 +38,28 @@ div.card-item {
         padding: 15px 5px 0px 5px;
 
         .icon {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color    : blue;
         }
     }
 
+    div {
+        .set-icon {
+            cursor   : pointer;
+            font-size: 1.1rem;
+        }
+    }
+
     header {
-        padding: 10px 0px;
+
+        padding: 5px 0px;
+        cursor : pointer;
 
         span {
             color: blue;
 
             label {
+
                 cursor: pointer;
 
                 input[type='radio'] {

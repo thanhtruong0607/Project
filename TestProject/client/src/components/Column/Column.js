@@ -1,26 +1,50 @@
 import React, { useState, useEffect } from "react";
 import './Column.scss';
 import Card from "../Card/Card";
-import { mapOrder } from "../../utils/sorts";
 import { Container, Draggable } from "react-smooth-dnd";
-import service from "../../service/axios";
+import Form from 'react-bootstrap/Form'
 
 const Column = (props) => {
 
     const { column, onCardDrop } = props;
 
-    console.log(column);
+    const [titleColumn, setTitleColumn] = useState("");
 
+    const selectAllText = (e) => {
+        e.target.focus();
+        e.target.select();
+    }
+
+    useEffect(() => {
+        if (column && column.title) {
+            setTitleColumn(column.title)
+        }
+    }, [column])
+
+    console.log(column);
 
     return (
         <>
             <div className='column'>
-                <header className="column-drag-handle">{column.title}</header>
+                <header className="column-drag-handle">
+                    <div>
+                        <Form.Control
+                            size={"sm"}
+                            type="text"
+                            value={titleColumn}
+                            className='customize-column'
+                            onClick={selectAllText}
+                            onChange={(e) => setTitleColumn(e.target.value)}
+                            spellCheck='false'
+                            onMouseDown={(e) => e.preventDefault()}
+                        />
+                    </div>
+                </header>
                 <div className="card-list">
                     <Container
                         groupName="col"
-                        // onDrop={dropResult => onCardDrop(column.id, dropResult)}
-                        // getChildPayload={index => column[id]}
+                        onDrop={dropResult => onCardDrop(column.title, dropResult)}
+                        getChildPayload={index => column.data[index]}
                         dragClass="card-ghost"
                         dropClass="card-ghost-drop"
                         dropPlaceholder={{
@@ -48,6 +72,7 @@ const Column = (props) => {
                     </div>
                 </footer>
             </div>
+
         </>
     )
 }

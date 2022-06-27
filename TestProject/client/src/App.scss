@@ -115,12 +115,25 @@ button:active {
 @import './settings';
 
 .trello-master {
-  height            : 100vh;
-  display           : grid;
-  grid-template-rows: 40px 50px 1fr;
+  height               : 100vh;
+  display              : grid;
+  grid-template-rows   : 40px 50px 1fr;
   // background-color  : $board-nav-bg-color;
-  color             : $app-main-text-color;
-  background-image  : url(https://i.pinimg.com/originals/78/bf/f5/78bff52c38128ba1e8fb43cc39a93b71.jpg);
+  color                : $app-main-text-color;
+  background-image     : url(https://i.pinimg.com/originals/78/bf/f5/78bff52c38128ba1e8fb43cc39a93b71.jpg);
+
+  .customize-column {
+    font-weight: bold;
+    cursor     : pointer;
+
+    &:focus {
+      border    : 2px solid rgb(44, 24, 228);
+      outline   : none !important;
+      box-shadow: none !important;
+    }
+
+    background-color: inherit;
+  }
 
   .icon {
     font-size   : 14px;

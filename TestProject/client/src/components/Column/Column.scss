@@ -2,7 +2,7 @@
 
 .column {
   flex  : 0 0 auto;
-  width : 360px;
+  width : 370px;
   height: calc(100vh - 40px - 50px - #{$gap});
 
   margin-left: $gap;
@@ -13,8 +13,8 @@
     padding         : 0px 7px;
   }
 
-  header.column-drag-handle {
-    padding-left           : 15px;
+  header {
+    padding                : 0px 25px 0px 8px;
     height                 : $column-header-height;
     line-height            : $column-header-height;
     font-size              : 16px;
@@ -22,6 +22,10 @@
     border-top-left-radius : $column-border-radius;
     border-top-right-radius: $column-border-radius;
     cursor                 : grab;
+  }
+
+  .column-drag-handle {
+    padding-top: 8px;
   }
 
   footer {

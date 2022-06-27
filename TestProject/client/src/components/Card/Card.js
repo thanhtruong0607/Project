@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import './Card.scss';
 import { FaStar } from 'react-icons/fa'
+import NextStage from '../NextStage/NextStage'
+
 
 const Card = (props) => {
 
@@ -9,6 +11,18 @@ const Card = (props) => {
     const [rating, setRating] = useState(null);
 
     const [hover, setHover] = useState(null);
+
+    const [isShowModal, setIsShowModal] = useState(false);
+
+    const toggleModal = () => {
+        setIsShowModal(!isShowModal)
+    }
+
+    const onModalAction = (type) => {
+        console.log(type)
+        toggleModal();
+    }
+
     let test = `/detail/${card.id}`
     return (
         <>
@@ -56,7 +70,7 @@ const Card = (props) => {
                     </span>
                     <div>
                         <span>
-                            <a className="fa fa-paper-plane-o" href="/next" ></a>
+                            <a className="fa fa-paper-plane-o set-icon" onClick={toggleModal} ></a>
                         </span>
                         <span>
                             <a className="fa fa-check-square-o" href="/check"></a>
@@ -66,6 +80,10 @@ const Card = (props) => {
                     </div>
                 </div>
             </div>
+            <NextStage
+                show={isShowModal}
+                onAction={onModalAction}
+            />
         </>
     )
 }

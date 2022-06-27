@@ -3,7 +3,7 @@ $gap: 10px;
 .project-card {
     height               : 100vh;
     // display           : grid;
-    grid-template-rows   : 60px 70px 1fr;
+    grid-template-rows   : 30px 40px 1fr;
     line-height          : 1.3em;
     background-image     : url(https://i.pinimg.com/originals/4c/f3/e1/4cf3e13aa6a24f9f61295e0e9a71be5c.jpg);
 
@@ -28,10 +28,10 @@ $gap: 10px;
 
 
         .project {
-            flex          : 0 0 auto;
-            width         : 400px;
-            // height     : calc(100% - #{$gap});
-            margin-left   : $gap;
+            flex       : 0 0 auto;
+            width      : 400px;
+            height     : calc(100% - #{$gap});
+            margin-left: $gap;
 
 
             >* {

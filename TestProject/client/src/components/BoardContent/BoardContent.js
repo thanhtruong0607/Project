@@ -3,7 +3,6 @@ import './BoardContent.scss';
 import Column from "../Column/Column";
 import { initData } from "../../actions/initData";
 import _ from 'lodash';
-import { mapOrder } from "../../utils/sorts";
 import { applyDrag } from "../../utils/dragDrop";
 import { Container, Draggable } from "react-smooth-dnd";
 import service from "../../service/axios";
@@ -99,40 +98,22 @@ const BoardContent = ({ project_id }) => {
     }
 
     const onColumnDrop = (dropResult) => {
+        let newBoards = [...board]
+        newBoards = applyDrag(newBoards, dropResult)
 
-        let newColumns = [...columns];
-        newColumns = applyDrag(newColumns, dropResult);
+        setBoard(newBoards)
 
-        let newBroad = { ...board };
-        newBroad.columnOrder = newColumns.map(c => c.id);
-        newBroad.columns = newColumns;
-
-        console.log(newBroad);
-
-        setColumns(newColumns);
-        setBoard(newBroad);
-        console.log(dropResult);
     }
 
-    // const onColumnDrop = (dropResult => {
-    //     console.log(dropResult);
-    // })
-
-    const onCardDrop = (columnId, dropResult) => {
-
+    const onCardDrop = (id, dropResult) => {
         if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-
-            let newColumns = [...columns];
-
-            let currentColumn = newColumns.find(c => c.id === columnId);
-
-            currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
-
-            currentColumn.cardOrder = currentColumn.cards.map(i => i.id);
-
-            console.log(currentColumn);
-            setColumns(newColumns);
+            let newBoards = [...board]
+            let currentBoard = newBoards.find(c => c.title === id)
+            currentBoard.data = applyDrag(currentBoard.data, dropResult)
+            console.log(newBoards);
+            setBoard(newBoards);
         }
+
     }
 
     const toggleOpenNewColumn = () => {
@@ -189,7 +170,7 @@ const BoardContent = ({ project_id }) => {
                         return (
                             <Draggable key={column.id}>
                                 <Column
-                                    column={column}
+                                    column={column} onCardDrop={onCardDrop}
                                 />
                             </Draggable>
                         )
@@ -221,7 +202,6 @@ const BoardContent = ({ project_id }) => {
                             </Col>
                         </Row>
                     }
-
                 </BootstrapContainer>
             </div>
         </>

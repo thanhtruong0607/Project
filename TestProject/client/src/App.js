@@ -10,6 +10,11 @@ import CheckList from './components/CheckList/CheckList';
 import TaskDetail from './components/TaskDetail/TaskDetail';
 import StatusBar from './components/StatusBar/StatusBar';
 import 'react-datepicker/dist/react-datepicker.css'
+import Team from './components/Team/Team';
+import AssignedBy from './components/AssignedBy/AssignedBy';
+import ReportTo from './components/ReportTo/ReportTo';
+import Tags from './components/Tags/Tags';
+import Supporters from './components/Supporters/Supporters';
 
 const App = () => {
 
@@ -24,6 +29,11 @@ const App = () => {
           <Route path='/check' element={<CheckList />} />
           <Route path='/detail/:id' element={<TaskDetail />} />
           <Route path='/nav' element={<StatusBar />} />
+          <Route path='/team' element={<Team />} />
+          <Route path='/report' element={<ReportTo />} />
+          <Route path='/assign' element={<AssignedBy />} />
+          <Route path='/tag' element={<Tags />} />
+          <Route path='/support' element={<Supporters />} />
         </Routes>
       </BrowserRouter>
     </div>

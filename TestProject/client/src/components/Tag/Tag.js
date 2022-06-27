@@ -7,7 +7,7 @@ const Tag = ({ ids }) => {
 
     useEffect(() => {
 
-        let fecthAPITag = async () => {
+        let fetchAPITag = async () => {
             let params = {
                 model: "project.tags",
                 method: "read",
@@ -34,8 +34,8 @@ const Tag = ({ ids }) => {
 
             setTag(data);
         }
-        fecthAPITag();
-        console.log(`=======>>>>`, ids)
+        fetchAPITag();
+        console.log(`====>>>>`, ids)
     }, [])
 
     return (
@@ -47,10 +47,6 @@ const Tag = ({ ids }) => {
 
                 )
             })}
-            <div>
-
-
-            </div>
 
         </>
     )
