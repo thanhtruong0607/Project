@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import service from '../../service/axios';
 
-const AssignedBy = () => {
+const AssignedTo = () => {
 
-    const [Assigned, setAssigned] = useState([]);
+    const [AssignedTo, setAssignedTo] = useState([]);
 
     useEffect(() => {
         let fetchAPIAssigned = async () => {
@@ -13,9 +13,16 @@ const AssignedBy = () => {
                 args:
                     [],
                 kwargs:
+
                 {
                     "name": "",
-                    "args": [],
+                    "args": [
+                        [
+                            "id",
+                            "in",
+                            []
+                        ]
+                    ],
                     "operator": "ilike",
                     "limit": 8,
                     "context": {
@@ -26,22 +33,23 @@ const AssignedBy = () => {
                             1
                         ]
                     }
+
                 }
             };
             let response = await service.post(params);
 
             let data = response.data && response.data.result ? response.data.result : [];
 
-            setAssigned(data);
+            setAssignedTo(data);
         }
         fetchAPIAssigned();
     }, [])
 
     return (
         <>
-            {console.log(`>>>>>`, Assigned)}
+            {console.log(`>>>>>`, AssignedTo)}
             <select>
-                {Assigned && Assigned.length > 0 && Assigned.map((assigned) => {
+                {AssignedTo && AssignedTo.length > 0 && AssignedTo.map((assigned) => {
                     return (
                         <option key={assigned} value={assigned}>
                             {assigned[1]}
@@ -53,4 +61,4 @@ const AssignedBy = () => {
     )
 }
 
-export default AssignedBy;
+export default AssignedTo;

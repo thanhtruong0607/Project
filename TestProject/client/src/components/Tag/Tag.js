@@ -32,18 +32,23 @@ const Tag = ({ ids }) => {
 
             let data = response && response.data.result ? response.data.result : [];
 
-            setTag(data);
+            setTag(data); 
         }
         fetchAPITag();
-        console.log(`====>>>>`, ids)
+        console.log(`==>>`, ids)
     }, [])
 
     return (
         <>
-            {console.log(`TAG: `, Tag)}
+            {console.log(`Tag: `, Tag)}
             {Tag && Tag.length > 0 && Tag.map(tag => {
                 return (
-                    <a className="badge rounded-pill bg-primary" href='#' role='button'>{tag.display_name}</a>
+                    <a key={tag.id}
+                        className="badge rounded-pill bg-primary"
+                        href='#'
+                        role='button'>
+                        {tag.display_name}
+                    </a>
 
                 )
             })}

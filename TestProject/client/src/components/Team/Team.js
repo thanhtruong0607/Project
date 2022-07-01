@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import service from '../../service/axios';
 import Select from 'react-select';
-
 const Team = () => {
 
     const [Team, setTeam] = useState([]);
@@ -41,6 +40,15 @@ const Team = () => {
     return (
         <>
             {console.log(`>>>>>`, Team)}
+            <select>
+                {Team && Team.length > 0 && Team.map((team) => {
+                    return (
+                        <option key={team} value={team}>
+                            {team[1]}
+                        </option>
+                    )
+                })}
+            </select>
         </>
 
     )

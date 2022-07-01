@@ -101,7 +101,7 @@ const BoardContent = ({ project_id }) => {
         let newBoards = [...board]
         newBoards = applyDrag(newBoards, dropResult)
 
-        setBoard(newBoards)
+        setBoard(newBoards);
 
     }
 

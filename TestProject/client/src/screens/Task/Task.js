@@ -8,7 +8,8 @@ import BoardContent from '../../components/BoardContent/BoardContent'
 const Task = () => {
 
     let route_params = useParams();
-    console.log(`gfg:`, route_params)
+    console.log(`gfg:`, route_params);
+
     return (
         <>
 

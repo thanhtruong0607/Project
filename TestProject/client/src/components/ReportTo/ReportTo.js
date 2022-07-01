@@ -29,7 +29,7 @@ const ReportTo = () => {
             };
             let response = await service.post(params);
 
-            let data = response && response.data ? response.data : [];
+            let data = response && response.data.result ? response.data.result : [];
 
             setReport(data);
         }
@@ -37,9 +37,18 @@ const ReportTo = () => {
     }, [])
 
     return (
-        <div>
-            {console.log(`>>>>>`, Report)};
-        </div>
+        <>
+            {console.log(`>>>>>`, Report)}
+            <select>
+                {Report && Report.length > 0 && Report.map((report) => {
+                    return (
+                        <option key={report} value={report}>
+                            {report[1]}
+                        </option>
+                    )
+                })}
+            </select>
+        </>
     )
 }
 

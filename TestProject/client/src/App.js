@@ -15,6 +15,7 @@ import AssignedBy from './components/AssignedBy/AssignedBy';
 import ReportTo from './components/ReportTo/ReportTo';
 import Tags from './components/Tags/Tags';
 import Supporters from './components/Supporters/Supporters';
+import AssignedTo from './components/AssignedTo/AssignedTo';
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/assign' element={<AssignedBy />} />
           <Route path='/tag' element={<Tags />} />
           <Route path='/support' element={<Supporters />} />
+          <Route path='/assignto' element={<AssignedTo />} />
         </Routes>
       </BrowserRouter>
     </div>

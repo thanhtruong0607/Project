@@ -38,9 +38,9 @@ const ReportTo = () => {
     }, [])
 
     return (
-        <div>
+        <>
             {console.log(`>>>>>`, Tags)};
-        </div>
+        </>
     )
 }
 

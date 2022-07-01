@@ -12,6 +12,7 @@ import ReportTo from '../ReportTo/ReportTo';
 import Tags from '../Tags/Tags';
 import Supporters from '../Supporters/Supporters';
 import AssignedBy from '../AssignedBy/AssignedBy';
+import AssignedTo from '../AssignedTo/AssignedTo';
 
 const TaskDetail = (props) => {
 
@@ -31,7 +32,7 @@ const TaskDetail = (props) => {
 
     useEffect(() => {
         let fetchTaskDetailAPI = async () => {
-            console.log(`gfg:`, route_params)
+            console.log(`>>>>:`, route_params)
             let params = {
                 model: "project.task",
                 method: "read",
@@ -153,10 +154,10 @@ const TaskDetail = (props) => {
                     return (
                         <div key={detail.id}>
                             <StatusBar stages={detail.stage_id} />
-                            <div className="row task-detail ">
+                            <div className="row task-detail">
 
 
-                                {isEdit ? <input type="text" value={detail.display_name} placeholder={detail.display_name}
+                                {isEdit ? <input type="text" placeholder={detail.display_name}
                                     defaultValue={selectedOption}
                                     onChange={setSelectedOption} /> : <h2>
                                     {detail.display_name}
@@ -169,10 +170,7 @@ const TaskDetail = (props) => {
                                             <td className='td_label'>
                                                 <label>Team</label>
                                             </td>
-                                            {isEdit ? <Select placeholder={detail.team_id[1]}
-                                                defaultValue={selectedOption}
-                                                onChange={setSelectedOption}
-                                                options={teamList} /> :
+                                            {isEdit ? <Team placeholder={detail.team_id[1]} /> :
                                                 <td className='td_form'>
                                                     {detail.team_id[1]}
                                                 </td>
@@ -183,9 +181,11 @@ const TaskDetail = (props) => {
                                             <td className='td_label'>
                                                 <label>Assigned To</label>
                                             </td>
-                                            {isEdit ? <Select placeholder={detail.user_id[1]}
-                                                defaultValue={selectedOption}
-                                                onChange={setSelectedOption} /> : <td className='td_form'>
+                                            {isEdit ? <select placeholder={detail.user_id[1]}>
+                                                <option>
+                                                    {detail.user_id[1]}
+                                                </option>
+                                            </select> : <td className='td_form'>
                                                 {detail.user_id[1]}
                                             </td>}
                                         </tr>
@@ -194,8 +194,7 @@ const TaskDetail = (props) => {
                                             <td className='td_label'>
                                                 <label>Supporters</label>
                                             </td>
-                                            {isEdit ? <Select options={dataList}
-                                            /> : <td className='td_form'>
+                                            {isEdit ? <Supporters placeholder="" /> : <td className='td_form'>
                                                 {detail.supporter_ids[1]}
                                             </td>}
                                         </tr>
@@ -205,10 +204,7 @@ const TaskDetail = (props) => {
                                                 <label>Assigned By</label>
                                             </td>
 
-                                            {isEdit ? <Select placeholder={detail.creator_id[1]}
-                                                defaultValue={selectedOption}
-                                                onChange={setSelectedOption}
-                                                options={dataList} /> : <td className='td_form'>
+                                            {isEdit ? <AssignedBy /> : <td className='td_form'>
                                                 {detail.creator_id[1]}
 
                                             </td>}
@@ -217,9 +213,7 @@ const TaskDetail = (props) => {
                                             <td className='td_label'>
                                                 <label>Report To</label>
                                             </td>
-                                            {isEdit ? <Select options={dataList}
-                                                defaultValue={selectedOption}
-                                                onChange={setSelectedOption} /> : <td className='td_form'>
+                                            {isEdit ? <ReportTo /> : <td className='td_form'>
                                                 {detail.report_to_ids[1]}
                                             </td>}
                                         </tr>
@@ -236,7 +230,9 @@ const TaskDetail = (props) => {
 
                                             {isEdit ? <DatePicker selected={selectedDate}
                                                 onChange={date => setSelectedDate(date)}
-                                                dateFormat='dd/MM/yyyy' showYearDropdown scrollableMonthYearDropdown /> :
+                                                dateFormat='dd/MM/yyyy'
+                                                showYearDropdown
+                                                scrollableMonthYearDropdown /> :
                                                 <td className='td_form'>
                                                     {detail.date_last_stage_update}
                                                 </td>}

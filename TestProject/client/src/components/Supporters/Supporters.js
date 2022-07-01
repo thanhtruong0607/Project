@@ -30,7 +30,7 @@ const Supporters = () => {
             };
             let response = await service.post(params);
 
-            let data = response && response.data ? response.data : [];
+            let data = response.data && response.data.result ? response.data.result : [];
 
             setSupport(data);
         }
@@ -38,9 +38,18 @@ const Supporters = () => {
     }, [])
 
     return (
-        <div>
-            {console.log(`>>>>>`, Support)};
-        </div>
+        <>
+            {console.log(`>>>>>`, Support)}
+            <select>
+                {Support && Support.length > 0 && Support.map((support) => {
+                    return (
+                        <option key={support} value={support}>
+                            {support[1]}
+                        </option>
+                    )
+                })}
+            </select>
+        </>
     )
 }
 
